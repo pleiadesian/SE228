@@ -1,0 +1,48 @@
+.bookColumn {
+    border-bottom: 1px solid #EAEAEA;
+    padding: 7px 5px;
+    list-style-type: none;
+}
+
+.columnWrapper {
+    height:150px;
+}
+
+.columnBlock {
+    float:left;
+    height : 90%;
+    padding:10px 0;
+}
+
+#imgBlock {
+    width:200px;
+}
+#imgBlock .bookcover {
+    float:left;
+}
+#imgBlock .bookcover img{
+    height: 120px;
+    width:96px;
+}
+
+#infoBlock {
+    width: 500px;
+    text-align: left;
+}
+#infoBlock #spanLeft{
+    width:200px;
+    overflow: hidden;
+}
+#infoBlock #spanRight{
+    float:right;
+}
+
+#handleBlock {
+    width: 290px;
+}
+
+#handleBlock #detail {
+    display:block;
+    margin: 30px auto;
+}
+

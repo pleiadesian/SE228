@@ -1,0 +1,42 @@
+div {
+    display:block;
+}
+
+
+
+#search {
+    position: absolute;
+    left:200px;
+    width:280px;
+    height: 33px;
+    margin: 30px 10px 0 10px;
+    background-color:white;
+    border: 1px solid #DDD;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+/*搜索输入框*/
+.inputtext{
+    margin: 0 0 0 15px;
+    padding:0;
+    float:left;
+    height: 95%;
+    width: 70%;
+    font-size: 15px;
+    border-color:white;
+    border-width:0;
+    outline:none;
+    background-color: white;
+}
+
+#sortBar {
+    float:right;
+    margin:25px auto;
+    width:1000px;
+}
+
+#sortBar button {
+    margin: 0 20px;
+    font-size:20px;
+}

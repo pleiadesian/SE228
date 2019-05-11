@@ -1,0 +1,213 @@
+﻿html,body,div {
+	margin:0;
+	padding:0;
+}
+
+div {
+	display:block;
+	overflow: hidden;
+}
+html {
+	display:block;
+	height: 100%;
+	width: 100%;
+	min-width: 1423px;
+}
+body {
+	background-color:white;
+	text-align:center;
+	height:100%;
+	width:100%;
+}
+ƒ
+h1 {
+	color: #3E3E3E;
+	font-size: 42px;
+	font-weight: 300;
+	display: inline;
+}
+
+a {
+	font-size: 28px;
+	font-weight: 300;
+	display: inline;
+	color: black;
+	text-decoration: none;
+	user-select: none;
+}
+
+	.option a:hover {
+		background-color: gray;
+		cursor: pointer;
+	}
+
+ul {
+	padding: 10px 0;
+	margin: 0 0 0 0;
+	width: 100%;
+	height: 100%;
+	list-style-type: none;
+}
+
+.button{
+	padding: 3px 15px;
+	background: #4EB1D4;
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+	border: 1px solid #48a2c3;
+	cursor: pointer;
+}
+.button:hover{
+	background: #61dafb;
+	border: 1px solid #48a2c3;
+}
+
+.crossBar {
+	height:120px;
+	border-bottom: 1px solid #DDD;
+}
+
+.section{
+	height: 90%;
+	width:80%;
+}
+
+#container {
+	height:800px;
+	width:100%;
+}
+
+
+#submitSearch{
+	position:relative;
+	top:3px;
+	left:-5px;
+	transform:scale(1.5);
+}
+
+
+#booklist {
+	width:100%;
+	height:100%;
+}
+
+
+.bookInfoCover {
+	height: 200px;
+	width:160px;
+}
+
+.bookImg {
+	float:left;
+	padding : 50px 0;
+	width : 20%;
+	height : 100%;
+}
+
+#infoColumn {
+	float :left;
+	padding : 0 50px;
+	font-size: 24px;
+	height: 100%;
+	width:25%;
+}
+
+#infoColumn li{
+	margin:60px 0;
+}
+
+#addToCart {
+	float:right;
+	padding : 100px 0;
+	width : 35%;
+	height : 100%;
+}
+
+	#addToCart .button {
+		display:block;
+		transform: scale(2);
+		position:relative;
+		left:-180px;
+		top :90px;
+	}
+	#addToCart input {
+		width:110px;
+		height:30px;
+		font-size: 15px;
+	}
+
+	#infolist{
+		width:500px;
+	}
+
+#loginColumn {
+	border:4px solid cadetblue;
+	border-radius: 5px;
+	width:600px;
+	margin:80px auto;
+	min-height: 230px;
+}
+
+
+.inputID{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #d9d9d9;
+	font-size: 15px;
+	padding: 5px 5px;
+	line-height: 22px;
+	background-color: #FDFDFD;
+	width: 98%;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#signupButton{
+	display: inline-block;
+	margin:30px auto;
+}
+
+#datePicker{
+	margin:10px auto;
+}
+
+.attribute {
+	text-align:left;
+	width:100%;
+}
+
+.main {
+	margin:0 auto;
+	/*height:650px;*/
+	width:1000px;
+}
+
+#mainBooklist{
+/*padding-bottom: 300px;*/
+	min-height: 550px;
+}
+
+#mainBookinfo{
+	height: 700px;
+	width:1300px;
+}
+
+#mainLoginpage{
+	height:600px;
+}
+
+#mainAdmin{
+	margin:50px auto;
+}
+
+#footer {
+	margin: 50px auto;
+	width: 500px;
+	height: 50px;
+}
+
+	#footer ul li a{
+		font-size: 20px;
+	}
