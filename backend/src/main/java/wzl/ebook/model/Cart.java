@@ -11,12 +11,6 @@ import java.util.List;
 
 public class Cart {
 
-    @Autowired
-    private OrderMapper orderMapper;
-
-    @Autowired
-    private BookMapper bookMapper;
-
     private List<CartItem> itemList = new LinkedList();
     private int userId;
 
@@ -40,7 +34,7 @@ public class Cart {
         return userId;
     }
 
-    public boolean submitCart() {
+    public boolean submitCart(BookMapper bookMapper, OrderMapper orderMapper) {
         // Get date for the new order
         Calendar cal = Calendar.getInstance();
         String date = String.valueOf(cal.get(Calendar.YEAR))+"-"+String.valueOf(cal.get(Calendar.MONTH)+1)+"-"
@@ -82,8 +76,14 @@ public class Cart {
             newOrder.insertOrderitems(newOrderitem);
         }
 
-        // 改变xml 插入new orderitem
         orderMapper.insert(newOrder);
+        try {
+            orderMapper.insertItem(newOrder);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        itemList.clear();
         return true;
     }
 
@@ -96,7 +96,7 @@ public class Cart {
         }
     }
 
-    public void addItem(int bookId, int quantity) {
+    public void addItem(BookMapper bookMapper, int bookId, int quantity) {
         Book bookItem = bookMapper.selectByPrimaryKey(bookId);
 
         if (bookItem == null)

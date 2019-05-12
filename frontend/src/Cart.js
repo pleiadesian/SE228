@@ -40,6 +40,10 @@ class Cart extends Component {
     }
 
     getSum() {
+        console.log("before get sum")
+        console.log(this.state.itemArr);
+        if( this.state.itemArr == null)
+            return 0;
         sum=0.0;
         this.state.itemArr.forEach((item)=>{
             sum += item.book.price * item.quantity;
@@ -85,9 +89,11 @@ class Cart extends Component {
                 }
             })
             .then(res => {
+                    console.log("submit cart");
+                    console.log(res.data);
                     if (!(res.data === false)) {
                         alert("购买成功");
-                        this.setState({itemArr: res.data});
+                        this.setState({itemArr: []});
                     } else {
                         // Check storage at back end
                         alert("库存不足，购买失败")
