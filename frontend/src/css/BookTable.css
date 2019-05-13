@@ -29,11 +29,11 @@
     width: 500px;
     text-align: left;
 }
-#infoBlock #spanLeft{
+.spanLeft{
     width:200px;
     overflow: hidden;
 }
-#infoBlock #spanRight{
+.spanRight{
     float:right;
 }
 

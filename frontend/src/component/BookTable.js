@@ -14,10 +14,14 @@ class BookTable extends Component {
         super(props);
 
         // Is admin mode?
-        var admin = cookie.load("admin") === true;
-        if (admin == null) {
+        var admin = cookie.load("admin");
+        if (admin == "true"){
+            admin = true;
+        }else {
             admin = false;
         }
+        console.log("booktable");
+        console.log(admin);
 
         this.state = {
             bookArr : this.props.bookArr,
@@ -27,6 +31,8 @@ class BookTable extends Component {
         this.handleDelete=this.handleDelete.bind(this);
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
         this.handleAddCart= this.handleAddCart.bind(this);
+        this.handleAdminChange = this.handleAdminChange.bind(this);
+        this.handleBookChange = this.handleBookChange.bind(this);
         this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
     }
 
@@ -78,36 +84,63 @@ class BookTable extends Component {
         if (renderArr.size>0 && !renderArr[0].hasOwnProperty(attr)) {
             return
         }
-        if ( type === "NONE") return
-        attrName = attr
-        sortType = type
-        renderArr.sort(this.compare)
+        if ( type === "NONE") return;
+        attrName = attr;
+        sortType = type;
+        renderArr.sort(this.compare);
     }
 
     // Delete a book from cart in the back end
+    // 添加在管理
     async handleDelete(bookid) {
         var userInfo = cookie.load("userInfo");
         if (userInfo == null) {
             alert("删除失败");
             return;
         }
-        await axios.get('/book/deleteCart',
-            {params:{
-                    bookId : bookid,
-                    userid : userInfo.id
-                }
+        // user is admin?
+        var admin = cookie.load("admin");
+        var login = cookie.load("login");
+        console.log("before delete admin state:");
+        console.log(admin);
+        console.log("before delete login state:");
+        console.log(admin);
+        if (admin == null || login == null || admin !== "true" || login !== "true" ){
+            admin = false;
+        }else {
+            admin = true;
+        }
+        console.log("before delete admin state:");
+        console.log(admin);
+        if (admin){
+            await axios.get('/book/deleteBook',
+                {
+                  params: {
+                      "bookId": bookid
+                  }
+                }).then(res => {
+                    this.setState({bookArr : res.data})
             })
-            .then(res => {
-                    // Get new book array json from back end
-                    console.log("cart delete:");
-                    console.log(res.data);
-                    this.setState({bookArr: res.data});
-                    // Parent component need to render again
-                    if(this.props.onQuantityChange) {
-                        this.props.onQuantityChange();
+        }else {
+            await axios.get('/book/deleteCart',
+                {
+                    params: {
+                        bookId: bookid,
+                        userid: userInfo.id
                     }
-                }
-            );
+                })
+                .then(res => {
+                        // Get new book array json from back end
+                        console.log("cart delete:");
+                        console.log(res.data);
+                        this.setState({bookArr: res.data});
+                        // Parent component need to render again
+                        if (this.props.onQuantityChange) {
+                            this.props.onQuantityChange();
+                        }
+                    }
+                );
+        }
     }
 
     // Quantity change in the cart page
@@ -137,6 +170,29 @@ class BookTable extends Component {
         }else{
             alert("请先登录");
         }
+    }
+
+    // Send bookId, attribute to change, new value to backend
+    async handleBookChange(id, attrName, newValue) {
+        console.log("new book:");
+        console.log(id);
+        console.log(attrName);
+        console.log(newValue);
+        await axios.get('/book/changeBookInfo',{
+            params: {
+                "bookId" : id,
+                "attrName" : attrName,
+                "newValue" : newValue
+            }
+        }).then( res =>{
+            console.log("after admin change a book:");
+            console.log(res.data);
+            if (res.data == null){
+                alert("修改失败");
+            }else {
+                this.setState({bookArr: res.data})
+            }
+        })
     }
 
     async handleAddCart(bookid) {
@@ -195,6 +251,83 @@ class BookTable extends Component {
         }
     }
 
+    handleColumnBlock(book) {
+        var admin = cookie.load("admin");
+        if (admin == null || admin !== "true") {
+            admin = false;
+        }else{
+            admin = true;
+        }
+        if (admin) {
+            return (
+                <div>
+                    <h2>
+                        <input id="bookName" contentEditable={this.state.admin}
+                           onChange={this.handleAdminChange.bind(this, book.id)} className="bookname" value={book.name} />
+                    </h2>
+                    <input className="category" id={"bookPrice"} contentEditable={this.state.admin}
+                       onChange={this.handleAdminChange.bind(this, book.id)}
+                        value = {book.price}/>
+                    <input id="bookAuthor" className={"spanLeft"} contentEditable={this.state.admin}
+                          onChange={this.handleAdminChange.bind(this, book.id)} value={book.author}/>
+                    <span className={"spanRight"}>ISBN:<input id={"bookIsbn"} contentEditable={this.state.admin}
+                                                             onChange={this.handleAdminChange.bind(this, book.id)} value={book.isbn}/></span>
+                    <span className={"spanRight"}>剩余<input id={"bookStorage"} contentEditable={this.state.admin}
+                                                          onChange={this.handleAdminChange.bind(this, book.id)} value={book.storage}/>件| </span>
+                </div>
+            );
+        }else {
+            return (
+                <div>
+                    <h2>
+                        <a id="bookName"  className="bookname">{book.name}</a>
+                    </h2>
+                    <p className="category" id={"bookPrice"} >
+                        ￥{book.price}
+                    </p>
+                    <span id="bookAuthor" className={"spanLeft"}>{book.author}</span>
+                    <span className={"spanRight"}>ISBN:<span id={"bookIsbn"}>{book.isbn}</span></span>
+                    <span className={"spanRight"}>剩余<span id={"bookStorage"}>{book.storage}</span>件| </span>
+                </div>
+            )
+        }
+    }
+
+    // this.handle...().bind(this,book.id)
+    handleAdminChange(bookid, e) {
+        console.log("admin change etargetid");
+        console.log(e.target.id);
+        console.log("bookid");
+        console.log(bookid);
+        var attrName;
+        if (e.target.id === "bookName"){
+            attrName = "name";
+        }else if(e.target.id === "bookAuthor") {
+            attrName = "author";
+        }else if(e.target.id === "bookPrice") {
+            attrName = "price";
+        }else if(e.target.id === "bookIsbn") {
+            attrName = "isbn";
+        }else if(e.target.id === "bookStorage") {
+            attrName = "storage"
+        }
+
+        // check permission
+        var admin = cookie.load("admin");
+        var login = cookie.load("login");
+        if (admin == null || login == null || admin !== "true" || login !== "true") {
+            alert("权限不足");
+            return;
+        }
+
+        this.state.bookArr.forEach((item,index) => {
+            if (item.id === bookid) {
+                item.attrName = e.target.value;
+                this.handleBookChange(item.id, attrName, e.target.value);  // bookId, attribute to change, new value
+            }
+        })
+    }
+
     render() {
         renderArr = [];
         this.filter(this.props.filterText);
@@ -221,15 +354,7 @@ class BookTable extends Component {
                             </Link>
                         </div>
                         <div className={"columnBlock"} id={"infoBlock"}>
-                            <h2>
-                                <a contentEditable={this.state.admin}  className="bookname" onClick={this.handleItem}>{book.name}</a>
-                            </h2>
-                            <p className="category" contentEditable={this.state.admin}>
-                                ￥{book.price}
-                            </p>
-                            <span id={"spanLeft"} contentEditable={this.state.admin}>{book.author}</span>
-                            <span id={"spanRight"}>ISBN:<span contentEditable={this.state.admin}>{book.isbn}</span></span>
-                            <span id={"spanRight"}>剩余<span contentEditable={this.state.admin}>{book.storage}</span>件| </span>
+                            {this.handleColumnBlock(book)}
                         </div>
                         <div className={"columnBlock"} id={"handleBlock"}>
                             <Link to={this.handleLink(book.id)} id={"detail"}>查看详情</Link>

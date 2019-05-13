@@ -105,7 +105,7 @@ class Header extends Component {
                     <li><Link to={"/admin/user"}>用户管理</Link></li>
                     <li><Link to={"/admin/book"}>书籍管理</Link></li>
                     <li><a onClick={this.handleSearch}>查找图书</a></li>
-                    <li><Link to={"/admin/order"} id={"login"}>订单</Link><Link to={"/login"} id={"register"}>退出</Link></li>
+                    <li><Link to={"/admin/order"} id={"login"}>订单</Link><Link onClick={this.logout} id={"register"}>退出</Link></li>
                 </ul>
             );
         }else{
@@ -123,9 +123,7 @@ class Header extends Component {
         // Redirect to home page after log out
         if (this.state.logout) {
                 this.setState({logout:false});
-
-                return (<Redirect to={"/"}/>);
-
+                return (<Redirect to={"/login"}/>);
         }
 
         return (

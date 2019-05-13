@@ -34,7 +34,13 @@ class Login extends Component {
                     if(!(res.data == null)) {
                         if (res.data.disabled == false) {
                             cookie.save("userInfo", res.data);
-                            cookie.save("admin", false);
+                            console.log("save userType:");
+                            console.log(res.data.usertype);
+                            if (res.data.usertype == "admin") {
+                                cookie.save("admin", true);
+                            }else {
+                                cookie.save("admin", false);
+                            }
                             cookie.save("login", true);
                             alert("登陆成功");
                             this.setState({isValid: true});
@@ -94,8 +100,12 @@ class Login extends Component {
     }
 
     render() {
-        if(this.state.isValid)   {
-            return(<Redirect to={"/"}/>);
+        if (cookie.load("admin") == "true") {
+            return(<Redirect to={"/admin/book"}/>);
+        }else {
+            if (this.state.isValid) {
+                return (<Redirect to={"/"}/>);
+            }
         }
 
         if (this.props.match.path === "/login") {
