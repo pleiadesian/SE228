@@ -12,5 +12,5 @@ public interface BookService {
 
     List<Book> deleteOneBook(int id);
 
-    List<Book> updateBookList(List<Book> booklist);
+    List<Book> updateBookList(String bookStr);
 }

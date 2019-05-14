@@ -40,8 +40,8 @@ public class BookController {
 
     // change business logic to implement commit whole book list to avoid error
     @RequestMapping(value = "/changeBookInfo", method = RequestMethod.POST)
-    public List<Book> changeBookInfo(@RequestParam("booklist") String booklist) {
+    public List<Book> changeBookInfo(@RequestParam("booklist") String bookStr) {
         System.out.println("updateing book list...");
-        return bookService.findAllBook();// temp replacement test here  bookService.updateBookList(booklist);
+        return bookService.updateBookList(bookStr);
     }
 }

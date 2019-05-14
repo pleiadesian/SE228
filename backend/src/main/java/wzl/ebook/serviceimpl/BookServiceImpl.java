@@ -1,6 +1,7 @@
 package wzl.ebook.serviceimpl;
 
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wzl.ebook.dao.BookMapper;
@@ -41,18 +42,19 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> updateBookList(List<Book> booklist) {
+    public List<Book> updateBookList(String bookStr) {
         try {
             List<Book> oldList = bookMapper.selectAll();
             List<Book> newList = new LinkedList<>();
+            List<Book> pendingList = JSON.parseArray(bookStr, Book.class);
 
             // match books between old and new list and update some attr
             for (Book oldBook : oldList) {
-                for (Book newBook : booklist) {
+                for (Book newBook : pendingList) {
                     if (oldBook.getId().equals(newBook.getId())) {
                         if (!oldBook.getStorage().equals(newBook.getStorage())) {
                             oldBook.setStorage(newBook.getStorage());
-                        }else if (!oldBook.getPrice().equals(newBook.getPrice())) {
+                        }else if (! (oldBook.getPrice() == newBook.getPrice())) {
                             oldBook.setPrice(newBook.getPrice());
                         }else if (!oldBook.getName().equals(newBook.getName())) {
                             oldBook.setName(newBook.getName());
@@ -60,25 +62,14 @@ public class BookServiceImpl implements BookService {
                             oldBook.setAuthor(newBook.getAuthor());
                         }else if (!oldBook.getIsbn().equals(newBook.getIsbn())) {
                             oldBook.setIsbn(newBook.getIsbn());
+                        }else{
+                            continue;
                         }
+                        // if some attr changes, add to new list
                         newList.add(oldBook);
                     }
                 }
             }
-            // Book newBook = bookMapper.selectByPrimaryKey(bookId);
-            // check input type
-            /*
-            if (attrName.equals("name")) {
-                newBook.setName(newValue);
-            }else if(attrName.equals("storage")){
-                newBook.setStorage(Short.valueOf(newValue));
-            }else if(attrName.equals("author")){
-                newBook.setAuthor(newValue);
-            }else if(attrName.equals("price")){
-                newBook.setPrice(BigDecimal.valueOf(Double.valueOf(newValue)));
-            }else if(attrName.equals("isbn")){
-                newBook.setIsbn(newValue);
-            }*/
             for (Book newBook : newList) {
                 bookMapper.updateByPrimaryKey(newBook);
             }
