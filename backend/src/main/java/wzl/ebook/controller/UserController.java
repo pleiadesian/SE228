@@ -10,80 +10,39 @@ import wzl.ebook.dao.UserMapper;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import wzl.ebook.model.User;
+import wzl.ebook.service.UserService;
 
 @RestController
 public class UserController {
 
-    // (多用户登录时如何处理)
-    private static String currUsername = "";
-    private static boolean currLogin = false;
-    private static User currUser;
-
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     // 获取当前登录的用户信息
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public JSONObject findCurrUser() {
-        String user =  JSON.toJSONString(currUser);
-        String jsonStr = "{\"username\":\""+currUsername+"\",\"login\":"+currLogin+",\"userInfo\":"+ user +"}";
-        JSONObject userInfo = JSON.parseObject(jsonStr);
-        return userInfo;
+    public JSONObject getLoginInfo() {
+        System.out.println("Searching user info...");
+        return userService.findCurrUser();  // 返回包含用户信息、登录信息、用户名的json对象
     }
 
     // 用户退出，删除信息
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public void deleteCurrUser() {
-        currUsername = "";
-        currLogin = false;
+    public void logout() {
+        System.out.println("Clearing user info...");
+        userService.deleteCurrUser();
     }
 
     // 用户登录
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JSONObject findLogin(@RequestParam("username") String username, @RequestParam("password") String password) {
-        Boolean isValid = checkLogin(username, password);
-        checkLogin(username, password);
-
-        if(isValid) {
-            return (JSON.parseObject(JSON.toJSONString(currUser)));
-        }else{
-            return null;
-        }
-    }
-
-    // 在数据库里检查用户名和密码
-    private Boolean checkLogin(String username, String password) {
-        User user = userMapper.selectByUsername(username);
-
-        if (user == null) return false;
-
-        if (password.equals(user.getPassword())) {
-            currUsername = username;
-            currLogin = true;
-            currUser = user;
-            return true;
-        }
-        return false;
+    public User login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        System.out.println("Checking user info...");
+        return userService.handleLogin(username, password);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public boolean doRegister(@RequestParam("username") String username, @RequestParam("password") String password,
                               @RequestParam("mail") String mail) {
-        return insertUser(username, password, mail);
-    }
-
-    private boolean insertUser(String username, String password, String mail) {
-        User user = userMapper.selectByUsername(username);
-
-        if (user != null) return false;
-
-        User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setPassword(password);
-        newUser.setUsertype("user");
-        newUser.setDisabled(false);
-        newUser.setMail(mail);
-        userMapper.insert(newUser);
-        return true;
+        System.out.println("Registering...");
+        return userService.handleRegister(username, password, mail);
     }
 }
