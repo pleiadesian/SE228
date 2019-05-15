@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import wzl.ebook.dao.OrderMapper;
 import wzl.ebook.model.Order;
+import wzl.ebook.service.OrderService;
 
 import java.util.List;
 
@@ -13,10 +14,11 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
-    private OrderMapper orderMapper;
+    private OrderService orderService;
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public List<Order> findAllOrder() {
-        return orderMapper.selectAll();
+    public List<Order> GetOrder() {
+        System.out.println("Searching order list...");
+        return orderService.findAllOrder();
     }
 }

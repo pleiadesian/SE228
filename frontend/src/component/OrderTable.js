@@ -39,9 +39,11 @@ class OrderTable extends Component {
         if (userInfo != null){
             user_id = userInfo.id
         }
-        var admin = cookie.load("admin") === true;
-        if (admin == null) {
+        var admin = cookie.load("admin");
+        if (admin == null || admin !== "true") {
             admin = false;
+        }else{
+            admin = true;
         }
 
         return (
