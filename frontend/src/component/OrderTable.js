@@ -69,16 +69,16 @@ class OrderTable extends Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.state.orders.map((item, index) => {
+                        {this.state.orders.map((item) => {
                             if(admin || item.userId === user_id) {
                                 // Is order time between start date and end date from user input?
                                 if (moment(item.ordertime).isBetween(moment(this.props.startDate),moment(this.props.endDate)) ||
                                     moment(item.ordertime).isSame(this.props.endDate) || moment(item.ordertime).isSame(this.props.startDate)) {
                                     return(
                                         //  遍历订单中每一个物品
-                                    item.orderitems.map((orderitem, orderitemIndex) =>{
+                                    item.orderitems.map((orderitem) =>{
                                         return (
-                                            <TableRow key={index}>
+                                            <TableRow>
                                                 <TableCell component="th" scope="row">
                                                     {item.id}
                                                 </TableCell>

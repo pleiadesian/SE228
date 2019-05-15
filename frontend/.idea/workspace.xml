@@ -3,15 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fa359e2d-2e70-45e5-88cb-2126baaa55bb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/mapper/BookMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/mapper/BookMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/CartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/PersonService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/serviceimpl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/serviceimpl/BookServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/component/OrderTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/OrderTable.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -97,8 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/component/OrderTable.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="46" column="9" lean-forward="true" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+            <state relative-caret-position="480">
+              <caret line="82" column="61" lean-forward="true" selection-start-line="82" selection-start-column="61" selection-end-line="82" selection-end-column="61" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -312,12 +303,12 @@
       <workItem from="1557885933500" duration="530000" />
       <workItem from="1557902111904" duration="602000" />
       <workItem from="1557902743916" duration="1162000" />
-      <workItem from="1557904666498" duration="885000" />
+      <workItem from="1557904666498" duration="1561000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="162575000" />
+    <option name="totallyTimeSpent" value="163251000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -627,8 +618,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/OrderTable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="46" column="9" lean-forward="true" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
+        <state relative-caret-position="480">
+          <caret line="82" column="61" lean-forward="true" selection-start-line="82" selection-start-column="61" selection-end-line="82" selection-end-column="61" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
