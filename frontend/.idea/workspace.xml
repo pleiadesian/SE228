@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa359e2d-2e70-45e5-88cb-2126baaa55bb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/BookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/serviceimpl/BookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/wzl/ebook/serviceimpl/BookServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -100,8 +104,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/component/BookTable.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="302" column="48" lean-forward="true" selection-start-line="302" selection-start-column="48" selection-end-line="308" selection-end-column="41" />
+            <state relative-caret-position="317">
+              <caret line="319" lean-forward="true" selection-start-line="319" selection-end-line="319" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -189,7 +193,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="523" />
     <option name="y" value="209" />
     <option name="width" value="1248" />
@@ -240,7 +244,10 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Confirmation" />
+  </component>
+  <component name="ReadonlyStatusHandler">
+    <option name="SHOW_DIALOG" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -301,11 +308,12 @@
       <workItem from="1557807316240" duration="623000" />
       <workItem from="1557826556698" duration="9818000" />
       <workItem from="1557885933500" duration="530000" />
+      <workItem from="1557914367976" duration="970000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159926000" />
+    <option name="totallyTimeSpent" value="160896000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -317,10 +325,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="523" y="209" width="1248" height="637" extended-state="0" />
+    <frame x="0" y="25" width="1920" height="1055" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19689542" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1271097" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -364,6 +372,7 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="RELOAD_CONTEXT" value="false" />
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
@@ -615,8 +624,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/BookTable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="302" column="48" lean-forward="true" selection-start-line="302" selection-start-column="48" selection-end-line="308" selection-end-column="41" />
+        <state relative-caret-position="317">
+          <caret line="319" lean-forward="true" selection-start-line="319" selection-end-line="319" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
