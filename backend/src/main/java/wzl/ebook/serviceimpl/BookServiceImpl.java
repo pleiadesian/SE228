@@ -54,7 +54,7 @@ public class BookServiceImpl implements BookService {
                     if (oldBook.getId().equals(newBook.getId())) {
                         if (!oldBook.getStorage().equals(newBook.getStorage())) {
                             oldBook.setStorage(newBook.getStorage());
-                        }else if (! (oldBook.getPrice() == newBook.getPrice())) {
+                        }else if (! (oldBook.getPrice().doubleValue() == newBook.getPrice().doubleValue())) {
                             oldBook.setPrice(newBook.getPrice());
                         }else if (!oldBook.getName().equals(newBook.getName())) {
                             oldBook.setName(newBook.getName());
