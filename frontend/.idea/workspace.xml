@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa359e2d-2e70-45e5-88cb-2126baaa55bb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/OrderTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/OrderTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -85,7 +84,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/OrderTable.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="480">
@@ -98,10 +97,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/css/BookTable.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/component/BookTable.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="259" column="16" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="16" />
+            <state relative-caret-position="165">
+              <caret line="336" column="23" lean-forward="true" selection-start-line="336" selection-start-column="23" selection-end-line="336" selection-end-column="23" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -303,12 +311,12 @@
       <workItem from="1557885933500" duration="530000" />
       <workItem from="1557902111904" duration="602000" />
       <workItem from="1557902743916" duration="1162000" />
-      <workItem from="1557904666498" duration="1561000" />
+      <workItem from="1557904666498" duration="2209000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163251000" />
+    <option name="totallyTimeSpent" value="163899000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -532,13 +540,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/BookTable.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Cart.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="606">
@@ -606,20 +607,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/BookTable.js">
+    <entry file="file://$PROJECT_DIR$/src/component/OrderTable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="259" column="16" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="16" />
+        <state relative-caret-position="480">
+          <caret line="82" column="61" lean-forward="true" selection-start-line="82" selection-start-column="61" selection-end-line="82" selection-end-column="61" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/OrderTable.js">
+    <entry file="file://$PROJECT_DIR$/src/css/BookTable.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="82" column="61" lean-forward="true" selection-start-line="82" selection-start-column="61" selection-end-line="82" selection-end-column="61" />
+        <state relative-caret-position="375">
+          <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/BookTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="336" column="23" lean-forward="true" selection-start-line="336" selection-start-column="23" selection-end-line="336" selection-end-column="23" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
