@@ -1,4 +1,10 @@
 /handin/
-*.idea/
-/target/
-/node_modules/
+*/.idea/
+*/target/
+*/node_modules/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
