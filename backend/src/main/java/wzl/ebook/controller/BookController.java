@@ -37,11 +37,16 @@ public class BookController {
         return bookService.deleteOneBook(bookId);
     }
 
-
-    // change business logic to implement commit whole book list to avoid error
     @RequestMapping(value = "/changeBookInfo", method = RequestMethod.POST)
     public List<Book> changeBookInfo(@RequestParam("booklist") String bookStr) {
         System.out.println("updateing book list...");
         return bookService.updateBookList(bookStr);
+    }
+
+    // Get new book info as json string from front end, return new book list
+    @RequestMapping(value = "/addBook", method = RequestMethod.POST)
+    public List<Book> addBook(@RequestParam("bookInfo") String bookStr) {
+        System.out.println("updateing book list...");
+        return bookService.addOneBook(bookStr);
     }
 }
