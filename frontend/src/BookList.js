@@ -76,6 +76,7 @@ class BookList extends Component {
                 if (res.data == null){
                     alert("修改失败");
                 }else {
+                    alert('更新成功');
                     this.setState({bookArr: res.data})
                 }
             })
