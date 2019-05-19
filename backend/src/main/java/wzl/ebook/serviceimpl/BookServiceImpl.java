@@ -19,7 +19,7 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     @Override
-    public List<Book> findAllBook(){
+    public List<Book> findAllBook() {
         return bookMapper.selectAll();
     }
 
@@ -30,12 +30,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> deleteOneBook(int id) {
-        try{
+        try {
             Book newBook = bookMapper.selectByPrimaryKey(id);
             newBook.setEnabled(false);
             bookMapper.updateByPrimaryKey(newBook);
             return bookMapper.selectAll();
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -54,15 +54,15 @@ public class BookServiceImpl implements BookService {
                     if (oldBook.getId().equals(newBook.getId())) {
                         if (!oldBook.getStorage().equals(newBook.getStorage())) {
                             oldBook.setStorage(newBook.getStorage());
-                        }else if (! (oldBook.getPrice().doubleValue() == newBook.getPrice().doubleValue())) {
+                        } else if (!(oldBook.getPrice().doubleValue() == newBook.getPrice().doubleValue())) {
                             oldBook.setPrice(newBook.getPrice());
-                        }else if (!oldBook.getName().equals(newBook.getName())) {
+                        } else if (!oldBook.getName().equals(newBook.getName())) {
                             oldBook.setName(newBook.getName());
-                        }else if (!oldBook.getAuthor().equals(newBook.getAuthor())) {
+                        } else if (!oldBook.getAuthor().equals(newBook.getAuthor())) {
                             oldBook.setAuthor(newBook.getAuthor());
-                        }else if (!oldBook.getIsbn().equals(newBook.getIsbn())) {
+                        } else if (!oldBook.getIsbn().equals(newBook.getIsbn())) {
                             oldBook.setIsbn(newBook.getIsbn());
-                        }else{
+                        } else {
                             continue;
                         }
                         // if some attr changes, add to new list
@@ -74,7 +74,20 @@ public class BookServiceImpl implements BookService {
                 bookMapper.updateByPrimaryKey(newBook);
             }
             return bookMapper.selectAll();
-        }catch (Exception e) {
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Book> addOneBook(String bookStr) {
+        try {
+            Book newBook = JSON.parseObject(bookStr, Book.class);
+            newBook.setEnabled(true);  // enable new book
+            bookMapper.insert(newBook);
+            return bookMapper.selectAll();
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

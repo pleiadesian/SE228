@@ -3,6 +3,7 @@ import Header from './component/Header';
 import BookTable from'./component/BookTable';
 import SearchBar from'./component/SearchBar';
 import Footer from './component/Footer';
+import AddBookForm from './component/AddBookForm';
 import axios from 'axios';
 import "./css/StyleSheet1.css"
 import cookie from "react-cookies";
@@ -24,6 +25,7 @@ class BookList extends Component {
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleBookTableChange = this.handleBookTableChange.bind(this);
         this.goGetData = this.goGetData.bind(this);
+        this.handleAddBook = this.handleAddBook.bind(this);
         this.goGetData();
     }
 
@@ -87,6 +89,12 @@ class BookList extends Component {
         this.state.tempBookArr = bookArr;
     }
 
+    handleAddBook(res_data) {
+        this.setState({
+            bookArr : res_data
+        })
+    }
+
     render() {
         // Display search bar?
         const searchBar = this.state.search ?
@@ -110,7 +118,7 @@ class BookList extends Component {
         var adminBar = admin ?
             <div>
                 <input type="submit" value="更新" id="submitUpdate" className="button" onClick={this.handleUpdate}/>
-                <input type="submit" value="添加"  id="submitAdd" className="button" />
+                <AddBookForm onAddBook = {this.handleAddBook}/>
             </div>
             : "";
 
