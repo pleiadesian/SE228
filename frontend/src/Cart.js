@@ -34,6 +34,8 @@ class Cart extends Component {
                     console.log(res.data);
                     if (res.data !== null) {
                         this.setState({itemArr: res.data});
+                    }else{
+                        this.setState({itemArr: []});
                     }
                 }
             );
@@ -42,14 +44,19 @@ class Cart extends Component {
     getSum() {
         console.log("before get sum")
         console.log(this.state.itemArr);
-        if( this.state.itemArr == null)
-            return 0;
-        sum=0.0;
-        this.state.itemArr.forEach((item)=>{
-            sum += item.book.price * item.quantity;
-        });
-        sum = sum.toFixed(2);
-        return sum
+        if( this.state.itemArr[0] == null) {
+            console.log("there");
+            sum = 0.0;
+            return 0.0;
+        }
+        else {
+            sum = 0.0;
+            this.state.itemArr.forEach((item) => {
+                sum += item.book.price * item.quantity;
+            });
+            sum = sum.toFixed(2);
+            return sum;
+        }
     }
 
     handleSubmitOrder() {
@@ -103,6 +110,7 @@ class Cart extends Component {
     }
 
     handleQuantityChange() {
+        console.log("is rerendering");
         this.goGetData();
     }
 

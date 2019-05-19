@@ -57,14 +57,16 @@ class BookTable extends Component {
         // Display book array json in console
         console.log("filter bookArr:");
         console.log(this.state.bookArr);
-        this.state.bookArr.forEach((item, index)=>{
-            // take book JSONObject out, push whole JSON complex Object back(containing quantity and bookinfo)
-            var book;
-            this.props.page === "cart" ? book = item.book : book = item;
-            if (book.name.indexOf(filterText) !== -1 || filterText === ""){
-                renderArr.push(item)
-            }
-        })
+        if (this.state.bookArr[0] != null) {
+            this.state.bookArr.forEach((item, index) => {
+                // take book JSONObject out, push whole JSON complex Object back(containing quantity and bookinfo)
+                var book;
+                this.props.page === "cart" ? book = item.book : book = item;
+                if (book.name.indexOf(filterText) !== -1 || filterText === "") {
+                    renderArr.push(item)
+                }
+            })
+        }
     }
 
     compare(a,b) {
