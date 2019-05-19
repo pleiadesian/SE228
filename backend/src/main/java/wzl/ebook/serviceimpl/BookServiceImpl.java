@@ -84,6 +84,7 @@ public class BookServiceImpl implements BookService {
     public List<Book> addOneBook(String bookStr) {
         try {
             Book newBook = JSON.parseObject(bookStr, Book.class);
+            newBook.setEnabled(true);  // enable new book
             bookMapper.insert(newBook);
             return bookMapper.selectAll();
         } catch (Exception e) {

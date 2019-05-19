@@ -349,6 +349,9 @@ class BookTable extends Component {
             }else{
                 book = item;
             }
+            if(book.img == null){
+                book.img = "./img/img_default.jpg"
+            }
             bookColumns.push(
                 <li className="bookColumn">
                     <div className={"columnWrapper"}>
@@ -357,7 +360,8 @@ class BookTable extends Component {
                                 <img
                                     src={require( "" + book.img)}
                                     alt={book.name}
-                                    className="bookimage"/>
+                                    className="bookimage"
+                                />
                             </Link>
                         </div>
                         <div className={"columnBlock"} id={"infoBlock"}>
