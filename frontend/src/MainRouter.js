@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import BookList from './BookList';
 import BookInfo from './BookInfo';
 import Login from './Login';
@@ -6,7 +7,6 @@ import Order from './Order';
 import AdminUser from './AdminUser';
 import {Route, Switch} from "react-router";
 import {HashRouter as Router} from "react-router-dom";
-import React from "react";
 
 class MainRouter extends Component {
     render () {
@@ -28,4 +28,4 @@ class MainRouter extends Component {
     }
 }
 
-export default MainRouter
+export default MainRouter;
