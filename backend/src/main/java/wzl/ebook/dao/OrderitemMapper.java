@@ -2,7 +2,7 @@ package wzl.ebook.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import wzl.ebook.model.Orderitem;
+import wzl.ebook.entity.Orderitem;
 
 public interface OrderitemMapper {
     /**

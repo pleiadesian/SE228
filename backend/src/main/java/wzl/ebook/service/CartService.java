@@ -1,6 +1,6 @@
 package wzl.ebook.service;
 
-import wzl.ebook.model.CartItem;
+import wzl.ebook.entity.CartItem;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

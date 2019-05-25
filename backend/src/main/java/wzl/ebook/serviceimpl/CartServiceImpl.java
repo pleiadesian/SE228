@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wzl.ebook.dao.BookMapper;
 import wzl.ebook.dao.OrderMapper;
-import wzl.ebook.model.Cart;
-import wzl.ebook.model.CartItem;
+import wzl.ebook.entity.Cart;
+import wzl.ebook.entity.CartItem;
 import wzl.ebook.service.CartService;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,7 +1,7 @@
 package wzl.ebook.dao;
 
 import java.util.List;
-import wzl.ebook.model.Book;
+import wzl.ebook.entity.Book;
 
 public interface BookMapper {
     /**

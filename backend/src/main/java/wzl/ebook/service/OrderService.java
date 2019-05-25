@@ -1,6 +1,6 @@
 package wzl.ebook.service;
 
-import wzl.ebook.model.Order;
+import wzl.ebook.entity.Order;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package wzl.ebook.model;
+package wzl.ebook.entity;
 
 import java.math.BigDecimal;
 import java.util.LinkedList;

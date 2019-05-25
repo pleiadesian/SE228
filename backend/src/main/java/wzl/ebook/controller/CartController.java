@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import wzl.ebook.dao.BookMapper;
-import wzl.ebook.dao.OrderMapper;
-import wzl.ebook.model.Cart;
-import wzl.ebook.model.CartItem;
+import wzl.ebook.entity.CartItem;
 import wzl.ebook.service.CartService;
 
 import javax.servlet.http.HttpServletRequest;

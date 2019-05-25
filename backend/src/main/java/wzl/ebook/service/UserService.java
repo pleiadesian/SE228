@@ -1,7 +1,7 @@
 package wzl.ebook.service;
 
 import com.alibaba.fastjson.JSONObject;
-import wzl.ebook.model.User;
+import wzl.ebook.entity.User;
 
 public interface UserService {
 

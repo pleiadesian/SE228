@@ -1,7 +1,7 @@
 package wzl.ebook.dao;
 
 import java.util.List;
-import wzl.ebook.model.User;
+import wzl.ebook.entity.User;
 
 public interface UserMapper {
     /**

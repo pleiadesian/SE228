@@ -1,6 +1,4 @@
-package wzl.ebook.model;
-
-import java.math.BigDecimal;
+package wzl.ebook.entity;
 
 public class CartItem {
 

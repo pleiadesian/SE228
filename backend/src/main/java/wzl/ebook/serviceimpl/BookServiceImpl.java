@@ -5,10 +5,9 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wzl.ebook.dao.BookMapper;
-import wzl.ebook.model.Book;
+import wzl.ebook.entity.Book;
 import wzl.ebook.service.BookService;
 
-import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 

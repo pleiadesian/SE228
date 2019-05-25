@@ -1,8 +1,7 @@
 package wzl.ebook.dao;
 
 import java.util.List;
-import wzl.ebook.model.Order;
-import wzl.ebook.model.Orderitem;
+import wzl.ebook.entity.Order;
 
 public interface OrderMapper {
     /**

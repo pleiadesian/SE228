@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wzl.ebook.dao.UserMapper;
-import wzl.ebook.model.User;
+import wzl.ebook.entity.User;
 import wzl.ebook.service.UserService;
 
 @Service

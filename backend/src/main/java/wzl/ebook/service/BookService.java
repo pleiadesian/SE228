@@ -1,6 +1,6 @@
 package wzl.ebook.service;
 
-import wzl.ebook.model.Book;
+import wzl.ebook.entity.Book;
 
 import java.util.List;
 

@@ -1,16 +1,13 @@
 package wzl.ebook.controller;
 
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import wzl.ebook.dao.BookMapper;
-import wzl.ebook.model.Book;
+import wzl.ebook.entity.Book;
 import wzl.ebook.service.BookService;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController

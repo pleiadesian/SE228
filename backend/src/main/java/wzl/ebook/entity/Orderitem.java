@@ -1,4 +1,4 @@
-package wzl.ebook.model;
+package wzl.ebook.entity;
 
 public class Orderitem {
     /**
