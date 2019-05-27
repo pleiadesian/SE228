@@ -83,6 +83,12 @@ public class BookServiceImpl implements BookService {
     public List<Book> addOneBook(String bookStr) {
         try {
             Book newBook = JSON.parseObject(bookStr, Book.class);
+
+            // check if value is legal
+            if (newBook.getPrice().doubleValue() < 0.0 || newBook.getStorage() < 0 || newBook.getName().equals("")){
+                return null;
+            }
+
             newBook.setEnabled(true);  // enable new book
             bookMapper.insert(newBook);
             return bookMapper.selectAll();

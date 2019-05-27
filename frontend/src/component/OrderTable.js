@@ -21,13 +21,27 @@ class OrderTable extends Component {
         this.goGetData();
     }
     async goGetData() {
-        await axios.get('/book/order')
+        var userInfo = cookie.load("userInfo");
+        var user_id = "";
+        if (userInfo != null){
+            user_id = userInfo.id
+        }
+        var admin = cookie.load("admin");
+        if (admin == null || admin !== "true") {
+            admin = false;
+        }
+        await axios.get('/book/order',{
+            params:{
+                "admin" : admin,
+                "userId" : user_id
+            }
+        })
             .then(res => {
                     console.log("get order table:");
                     console.log(res.data);
-                    if(res.data === null)
-                        return;
-                    this.setState({orders: res.data});
+                    if(res.data[0] != null) {
+                        this.setState({orders: res.data});
+                    }
                 }
             )
     }
@@ -70,35 +84,33 @@ class OrderTable extends Component {
                     </TableHead>
                     <TableBody>
                         {this.state.orders.map((item) => {
-                            if(admin || item.userId === user_id) {
-                                // Is order time between start date and end date from user input?
-                                if (moment(item.ordertime).isBetween(moment(this.props.startDate),moment(this.props.endDate)) ||
-                                    moment(item.ordertime).isSame(this.props.endDate) || moment(item.ordertime).isSame(this.props.startDate)) {
-                                    return(
-                                        //  遍历订单中每一个物品
-                                    item.orderitems.map((orderitem) =>{
-                                        return (
-                                            <TableRow>
-                                                <TableCell component="th" scope="row">
-                                                    {item.id}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    {item.ordertime}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    {item.userId}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    {orderitem.bookId}
-                                                </TableCell>
-                                                <TableCell align="center">
-                                                    {orderitem.num}
-                                                </TableCell>
-                                            </TableRow>
-                                        )
-                                    })
+                            // Is order time between start date and end date from user input?
+                            if (moment(item.ordertime).isBetween(moment(this.props.startDate),moment(this.props.endDate)) ||
+                                moment(item.ordertime).isSame(this.props.endDate) || moment(item.ordertime).isSame(this.props.startDate)) {
+                                return(
+                                    //  遍历订单中每一个物品
+                                item.orderitems.map((orderitem) =>{
+                                    return (
+                                        <TableRow>
+                                            <TableCell component="th" scope="row">
+                                                {item.id}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {item.ordertime}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {item.userId}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {orderitem.bookId}
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                {orderitem.num}
+                                            </TableCell>
+                                        </TableRow>
                                     )
-                                }
+                                })
+                                )
                             }
                         })}
                     </TableBody>

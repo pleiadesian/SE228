@@ -7,6 +7,7 @@ import AddBookForm from './component/AddBookForm';
 import axios from 'axios';
 import "./css/StyleSheet1.css"
 import cookie from "react-cookies";
+import Alert from "./component/Alert";
 
 class BookList extends Component {
     constructor(props) {
@@ -17,8 +18,11 @@ class BookList extends Component {
             sortType: "None",
             search : false,
             bookArr: [],
-            tempBookArr : []
+            tempBookArr : [],
+            content: ""
         };
+
+        this.handleAlert = this.handleAlert.bind(this);
         this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
         this.handleSortChange = this.handleSortChange.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
@@ -64,7 +68,7 @@ class BookList extends Component {
     async handleUpdate() {
         var booklist= this.state.tempBookArr;
         if (booklist == null) {
-            alert("未修改任何值");
+            this.handleAlert("未修改任何值");
         }else{
             console.log("get book list from cookie:");
             console.log(booklist);
@@ -75,10 +79,10 @@ class BookList extends Component {
                 .then( res =>{
                 console.log("after admin change a book:");
                 console.log(res.data);
-                if (res.data == null){
-                    alert("修改失败");
+                if (res.data[0] == null){
+                    this.handleAlert("修改后的数据不合法，修改失败");
                 }else {
-                    alert('更新成功');
+                    this.handleAlert('更新成功');
                     this.setState({bookArr: res.data})
                 }
             })
@@ -93,6 +97,10 @@ class BookList extends Component {
         this.setState({
             bookArr : res_data
         })
+    }
+
+    handleAlert(content) {
+        this.setState({content : content})
     }
 
     render() {
@@ -124,6 +132,7 @@ class BookList extends Component {
 
         return (
             <div>
+                <Alert content={this.state.content}/>
                 <Header
                     onSearchChange = {this.handleSearchChange}
                 />
