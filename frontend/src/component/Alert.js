@@ -10,8 +10,8 @@ class Alert extends Component {
             visible: false,
             content: this.props.content
         };
-        this.showModal = this.showModal.bind(this);
         this.handleOk = this.handleOk.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
     }
     componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.content === "") {
@@ -19,11 +19,6 @@ class Alert extends Component {
         }else {
             this.setState({visible: true, content: nextProps.content})
         }
-    }
-    showModal(){
-        this.setState({
-            visible: true
-        })
     }
     handleOk() {
         this.setState({
