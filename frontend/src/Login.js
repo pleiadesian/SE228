@@ -16,13 +16,13 @@ class Login extends Component {
             repeatPassword : "",
             mail : "",
             isValid : false,
-            content: ""
+            content1: "",
+            content2: ""
         }
         this.handleAlert = this.handleAlert.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.goLogin = this.goLogin.bind(this);
         this.goRegister = this.goRegister.bind(this);
-        this.handleMainHeader = this.handleMainHeader.bind(this);
     }
 
     async goLogin() {
@@ -46,26 +46,26 @@ class Login extends Component {
                                 cookie.save("admin", false);
                             }
                             cookie.save("login", true);
-                            this.handleAlert("登陆成功");
+                            this.handleAlert("登陆成功", 1);
                             this.setState({isValid: true});
                         }else{
-                            this.handleAlert("登陆失败")
+                            this.handleAlert("登陆失败", 1)
                         }
                     }
                     else {
-                        this.handleAlert("用户名或密码不正确");
+                        this.handleAlert("用户名或密码不正确", 1);
                     }
                 }
             )
     }
     async goRegister() {
         if (this.state.password !== this.state.repeatPassword) {
-            this.handleAlert("两次输入密码不一致")
+            this.handleAlert("两次输入密码不一致", 2);
             return;
         }
 
         if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.state.mail)) {
-            this.handleAlert("邮箱格式不正确");
+            this.handleAlert("邮箱格式不正确", 2);
             return;
         }
 
@@ -78,14 +78,14 @@ class Login extends Component {
                     console.log("after register request:");
                     console.log(res.data);
                     if(res.data === true) {
-                        this.handleAlert("注册成功");
+                        this.handleAlert("注册成功", 2);
                         this.setState({isValid : true});
                     }
                     else if(res.data === false)
                     {
-                        this.handleAlert("该用户名已被注册");
+                        this.handleAlert("该用户名已被注册", 2);
                     }else{
-                        this.handleAlert("错误");
+                        this.handleAlert("错误", 2);
                     }
                 }
             )
@@ -103,12 +103,13 @@ class Login extends Component {
         }
     }
 
-    handleAlert(content) {
-        this.setState({content : content});
-    }
-
-    handleMainHeader(){
-
+    // two state change to deal with login or register page
+    handleAlert(content, id) {
+        if (id === 1) {
+            this.setState({content1: content, content2: ""});
+        }else if(id === 2){
+            this.setState({content1: "", content2: content});
+        }
     }
 
     render() {
@@ -121,14 +122,12 @@ class Login extends Component {
             }
         }
 
-        var alertColumn = (
-        <Alert content={this.state.content}/>
-        );
 
         if (this.props.match.path === "/login") {
+            this.state.content2="";
             return (
                 <div>
-                    {alertColumn}
+                    <Alert content={this.state.content1}/>
                     <Header
                         login={true}
                         username={this.state.username}
@@ -149,11 +148,14 @@ class Login extends Component {
                 </div>
             );
         } else {
+            this.state.content1="";
             return (
                 <div>
-                    {alertColumn}
+                    <Alert content={this.state.content2}/>
                     <Header/>
                     <div id="mainLoginpage" className="main">
+                        <div>
+                        </div>
                         <div id="loginColumn">
                             <p className="title">用户名</p>
                             <input id="username" className="inputID" type="text" name="username"
