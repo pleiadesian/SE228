@@ -31,13 +31,17 @@ class AddBookForm extends Component {
     async goAddBook(params) {
         await axios.post('/book/addBook',params)
             .then(res => {
-                alert("添加成功");
-                if (this.props.onAddBook) {
-                    this.props.onAddBook(res.data);
+                if (res.data[0] == null) {
+                    alert("添加的字段不合法，添加失败");
+                }else {
+                    alert("添加成功");
+                    if (this.props.onAddBook) {
+                        this.props.onAddBook(res.data);
+                    }
+                    this.setState({
+                        visible: false
+                    })
                 }
-                this.setState({
-                    visible: false
-                })
             })
     }
     handleOk() {

@@ -75,8 +75,8 @@ class BookList extends Component {
                 .then( res =>{
                 console.log("after admin change a book:");
                 console.log(res.data);
-                if (res.data == null){
-                    alert("修改失败");
+                if (res.data[0] == null){
+                    alert("修改后的数据不合法，修改失败");
                 }else {
                     alert('更新成功');
                     this.setState({bookArr: res.data})
