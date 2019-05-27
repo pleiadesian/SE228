@@ -5,15 +5,18 @@ import Footer from './component/Footer';
 import "./css/StyleSheet1.css"
 import axios from "axios";
 import cookie from 'react-cookies';
+import Alert from "./component/Alert";
 
 class BookInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			bookInfo : {ID:0,name:"" ,img:"./img/book0.jpg",price: 0,isbn:"0",storage:0,author:"",area:"",press:"",time:""},
-			quantity : 1
+			quantity : 1,
+			content: ""
 		};
 		this.goGetData = this.goGetData.bind(this);
+		this.handleAlert = this.handleAlert.bind(this);
 		this.handleAddCart = this.handleAddCart.bind(this);
 		this.handleQuantityChange = this.handleQuantityChange.bind(this);
 		this.goGetData();
@@ -41,7 +44,7 @@ class BookInfo extends Component {
 	async handleAddCart() {
 		var userInfo = cookie.load("userInfo");
 		if (userInfo == null) {
-			alert("请先登录");
+			this.handleAlert("请先登录");
 			return;
 		}
 		var userid = cookie.load("userInfo").id;
@@ -57,17 +60,25 @@ class BookInfo extends Component {
 				})
 				.then(res => {
 						console.log(res.data);
-						alert("添加成功")
+						this.handleAlert("添加成功")
 					}
 				)
-		}else{
-			alert("请先登录");
+		}else {
+			this.handleAlert("请先登录");
 		}
+
+	}
+
+	handleAlert(content) {
+		this.setState({content : content})
 	}
 
     render() {
+		console.log("alert content after render:");
+		console.log(this.state.content);
         return (
         	<div >
+				<Alert content={this.state.content}/>
 				<Header/>
 				<div  id={"mainBookinfo"} className={"main"}>
 					<div className={"bookImg"}>

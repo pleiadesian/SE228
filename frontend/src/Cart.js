@@ -5,14 +5,17 @@ import Footer from './component/Footer';
 import "./css/StyleSheet1.css"
 import axios from "axios";
 import cookie from 'react-cookies';
+import Alert from "./component/Alert";
 
 var sum = 0;
 class Cart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            itemArr :[]
+            itemArr :[],
+            content: ""
         };
+        this.handleAlert = this.handleAlert.bind(this);
         this.goGetData = this.goGetData.bind(this);
         this.handleSubmitOrder = this.handleSubmitOrder.bind(this);
         this.submitOrder = this.submitOrder.bind(this);
@@ -23,7 +26,7 @@ class Cart extends Component {
     async goGetData() {
         var userInfo = cookie.load("userInfo");
         if (userInfo == null){
-            alert("获取用户信息错误");
+            this.handleAlert("获取用户信息错误");
             return;
         }
         var userid = userInfo.id;
@@ -63,7 +66,7 @@ class Cart extends Component {
         var valid = true;
         // Item list is null?
          if(this.state.itemArr[0] == null) {
-             alert("购物车为空");
+             this.handleAlert("购物车为空");
              valid = false;
          }
 
@@ -71,7 +74,7 @@ class Cart extends Component {
         if(valid) {
             this.state.itemArr.forEach((item, index) => {
                 if (item.quantity > item.book.storage) {
-                    alert("库存不足，购买失败");
+                    this.handleAlert("库存不足，购买失败");
                     valid = false;
                 }
             });
@@ -80,7 +83,7 @@ class Cart extends Component {
         if (valid) {
          var userInfo = cookie.load("userInfo");
             if (userInfo == null) {
-                alert("请先登录");
+                this.handleAlert("请先登录");
             }else {
                 var userid = cookie.load("userInfo").id;
                 this.submitOrder(userid);
@@ -99,11 +102,11 @@ class Cart extends Component {
                     console.log("submit cart");
                     console.log(res.data);
                     if (!(res.data === false)) {
-                        alert("购买成功");
+                        this.handleAlert("购买成功");
                         this.setState({itemArr: []});
                     } else {
                         // Check storage at back end
-                        alert("库存不足，购买失败")
+                        this.handleAlert("库存不足，购买失败")
                     }
                 }
             );
@@ -114,10 +117,15 @@ class Cart extends Component {
         this.goGetData();
     }
 
+    handleAlert(content) {
+        this.setState({content : content})
+    }
+
     render() {
         this.getSum();
         return (
             <div>
+                <Alert content={this.state.content}/>
                 <Header/>
                 <div className={"crossBar"}>
                     <h2>总金额：{sum}</h2>

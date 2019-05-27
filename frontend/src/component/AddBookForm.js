@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { Modal} from 'antd';
 import "antd/dist/antd.css";
 import axios from "axios";
+import Alert from "./Alert";
 
 class AddBookForm extends Component {
     constructor(props) {
@@ -15,8 +16,10 @@ class AddBookForm extends Component {
             isbn: "",
             area: "",
             press: "",
-            time: ""
+            time: "",
+            content: ""
         };
+        this.handleAlert = this.handleAlert.bind(this);
         this.showModal = this.showModal.bind(this);
         this.handleOk = this.handleOk.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
@@ -32,9 +35,9 @@ class AddBookForm extends Component {
         await axios.post('/book/addBook',params)
             .then(res => {
                 if (res.data[0] == null) {
-                    alert("添加的字段不合法，添加失败");
+                    this.handleAlert("添加的字段不合法，添加失败");
                 }else {
-                    alert("添加成功");
+                    this.handleAlert("添加成功");
                     if (this.props.onAddBook) {
                         this.props.onAddBook(res.data);
                     }
@@ -77,9 +80,15 @@ class AddBookForm extends Component {
             case "time":    this.state.time = e.target.value;   break;
         }
     }
+
+    handleAlert(content) {
+        this.setState({content : content})
+    }
+    
     render() {
         return (
             <div>
+                <Alert content={this.state.content}/>
                 <input type="submit" className="button" onClick={this.showModal} value="添加"/>
                 <Modal title="添加书籍信息" visible={this.state.visible}
                        onOk={this.handleOk} onCancel={this.handleCancel}
