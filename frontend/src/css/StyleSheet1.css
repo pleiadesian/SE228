@@ -141,13 +141,6 @@ ul {
 		width:500px;
 	}
 
-#loginColumn {
-	border:4px solid cadetblue;
-	border-radius: 5px;
-	width:600px;
-	margin:80px auto;
-	min-height: 230px;
-}
 
 
 .inputID{
@@ -168,6 +161,15 @@ ul {
 	display: inline-block;
 	margin:30px auto;
 }
+
+#loginColumn {
+	border:4px solid cadetblue;
+	border-radius: 5px;
+	width:600px;
+	margin:80px auto;
+	min-height: 260px;
+}
+
 
 #datePicker{
 	margin:10px auto;

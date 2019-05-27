@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from "moment";
+import Alert from "./Alert";
 
 const dateFormat = 'YYYY-MM-DD';
 class DatePicker extends Component {
@@ -8,7 +9,8 @@ class DatePicker extends Component {
         super(props);
         this.state = {
             startDate : moment('20150101',dateFormat),
-            endDate : "2019-01-01"
+            endDate : "2019-01-01",
+            content: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit= this.handleSubmit.bind(this);
@@ -30,16 +32,21 @@ class DatePicker extends Component {
                     moment(this.state.endDate).isAfter(moment(this.state.startDate))) {
                     this.props.onChange(moment(this.state.startDate).format(dateFormat), moment(this.state.endDate).format(dateFormat));
                 }else{
-                    alert("无效日期范围")
+                    this.handleAlert("无效日期范围")
                 }
         }else{
-            alert("日期格式应为 YYYY-MM-DD");
+            this.handleAlert("日期格式应为 YYYY-MM-DD");
         }
+    }
+
+    handleAlert(content) {
+        this.setState({content : content})
     }
 
     render() {
         return (
             <div>
+                <Alert content={this.state.content}/>
                 <span>开始日期</span>
                 <input id="startDate" className="dateInput" type="text" onChange={this.handleChange}/><br/>
                 <span>结束日期</span>

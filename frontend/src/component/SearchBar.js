@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+import cookie from 'react-cookies';
 import "../css/SearchBar.css"
 
 class SearchBar extends Component {

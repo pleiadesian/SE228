@@ -1,6 +1,5 @@
-package wzl.ebook.model;
+package wzl.ebook.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import wzl.ebook.dao.BookMapper;
 import wzl.ebook.dao.OrderMapper;
 

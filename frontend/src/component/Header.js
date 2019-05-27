@@ -3,6 +3,7 @@ import '../css/Header.css';
 import {Link, Redirect} from "react-router-dom";
 import axios from "axios";
 import cookie from 'react-cookies';
+import Alert from "./Alert";
 
 class Header extends Component {
     constructor(props) {
@@ -25,8 +26,10 @@ class Header extends Component {
             admin: admin,
             login: login,
             username : username,
-            logout : false
+            logout : false,
+            content : ""
         };
+        this.handleAlert = this.handleAlert.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleNavi = this.handleNavi.bind(this);
         this.goGetData = this.goGetData.bind(this);
@@ -57,19 +60,15 @@ class Header extends Component {
     }
 
     async handleLogout() {
-        console.log("excute log out")
-        await axios.get('/book/logout')
-            .then(res => {
-                    cookie.remove("userInfo");
-                    cookie.save("login", false);
-                    cookie.save("admin", false);
-                    this.setState({
-                        login : false ,
-                        username :"",
-                        logout : true
-                    })
-                }
-            )
+        console.log("excute log out");
+        cookie.remove("userInfo");
+        cookie.save("login", false);
+        cookie.save("admin", false);
+        this.setState({
+            login : false ,
+            username :"",
+            logout : true
+        })
     }
 
     handleSearch() {
@@ -78,8 +77,8 @@ class Header extends Component {
         }
     }
 
-    handleAlert() {
-        alert("请先登录");
+    handleAlert(content) {
+        this.setState({content : "请先登录"})
     }
 
     handleNavi() {
@@ -128,6 +127,7 @@ class Header extends Component {
 
         return (
             <div id="header">
+                <Alert content={this.state.content}/>
                 <div id="caption">
                     <h1>e-book</h1>
                 </div>
