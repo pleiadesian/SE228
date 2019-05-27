@@ -57,19 +57,15 @@ class Header extends Component {
     }
 
     async handleLogout() {
-        console.log("excute log out")
-        await axios.get('/book/logout')
-            .then(res => {
-                    cookie.remove("userInfo");
-                    cookie.save("login", false);
-                    cookie.save("admin", false);
-                    this.setState({
-                        login : false ,
-                        username :"",
-                        logout : true
-                    })
-                }
-            )
+        console.log("excute log out");
+        cookie.remove("userInfo");
+        cookie.save("login", false);
+        cookie.save("admin", false);
+        this.setState({
+            login : false ,
+            username :"",
+            logout : true
+        })
     }
 
     handleSearch() {

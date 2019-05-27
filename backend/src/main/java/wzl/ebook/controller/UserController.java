@@ -16,20 +16,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // 获取当前登录的用户信息
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public JSONObject getLoginInfo() {
-        System.out.println("Searching user info...");
-        return userService.findCurrUser();  // 返回包含用户信息、登录信息、用户名的json对象
-    }
-
-    // 用户退出，删除信息
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public void logout() {
-        System.out.println("Clearing user info...");
-        userService.deleteCurrUser();
-    }
-
     // 用户登录
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public User login(@RequestParam("username") String username, @RequestParam("password") String password) {
