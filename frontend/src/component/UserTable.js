@@ -22,7 +22,7 @@ class UserTable extends Component {
     async goGetData() {
         await axios.get('/book/user')
             .then(res => {
-                    console.log("get user table:")
+                    console.log("get user table:");
                     console.log(res.data);
                     this.setState({users: res.data});
                 }

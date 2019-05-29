@@ -10,6 +10,8 @@ import com.alibaba.fastjson.JSONObject;
 import wzl.ebook.entity.User;
 import wzl.ebook.service.UserService;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
@@ -28,5 +30,11 @@ public class UserController {
                               @RequestParam("mail") String mail) {
         System.out.println("Registering...");
         return userService.handleRegister(username, password, mail);
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public List<User> getUserTable() {
+        System.out.println("Searching user info……");
+        return userService.findAllUser();
     }
 }

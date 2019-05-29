@@ -8,6 +8,8 @@ import wzl.ebook.dao.UserMapper;
 import wzl.ebook.entity.User;
 import wzl.ebook.service.UserService;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean handleRegister(String username, String password, String mail) {
+
         User user = userMapper.selectByUsername(username);
 
         if (user != null) return false;
@@ -39,7 +42,22 @@ public class UserServiceImpl implements UserService {
         newUser.setUsertype("user");
         newUser.setDisabled(false);
         newUser.setMail(mail);
-        userMapper.insert(newUser);
-        return true;
+        try {
+            userMapper.insert(newUser);
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<User> findAllUser() {
+        try {
+            return userMapper.selectAll();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
