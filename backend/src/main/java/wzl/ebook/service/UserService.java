@@ -16,4 +16,7 @@ public interface UserService {
 
     List<User> changeUserAuth(int id, boolean auth);
 
+    void saveUserInfo(int id, String address, String gender, String telephone, String img);
+
+    UserInfo getUserInfo(int id);
 }

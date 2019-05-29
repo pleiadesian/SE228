@@ -13,7 +13,13 @@ public class UserInfo {
     private String gender;
     private String telephone;
     private String img;
-    
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getAddress(){
         return address;
     }

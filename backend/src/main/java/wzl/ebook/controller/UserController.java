@@ -58,9 +58,12 @@ public class UserController {
         return userService.changeUserAuth(userId, false);
     }
 
-    @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-    public UserInfo getUserInfo() {
-        UserInfo userInfo = new UserInfo();
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+    public UserInfo getUserInfo(@RequestParam("userId") int userId) {
+       return userService.getUserInfo(userId);
+
+
+       /* UserInfo userInfo = new UserInfo();
         userInfo.setAddress("1");
         userInfo.setGender("2");
         userInfo.setImg("3");
@@ -69,6 +72,13 @@ public class UserController {
         Query query = new Query(Criteria.where("Address").is("1"));
         UserInfo userGetFromMdb = mongoOperations.findOne(query, UserInfo.class, "users");
         System.out.println(userGetFromMdb.getGender());
-        return userGetFromMdb;
+        return userGetFromMdb;*/
+    }
+
+    @RequestMapping(value = "/saveUserInfo", method = RequestMethod.GET)
+    public void saveUserInfo(@RequestParam("userId") int userId,@RequestParam("address") String address,
+                             @RequestParam("gender") String gender,@RequestParam("telephone") String telephone,
+                             @RequestParam("img") String img) {
+        userService.saveUserInfo(userId, address, gender, telephone, img);
     }
 }
