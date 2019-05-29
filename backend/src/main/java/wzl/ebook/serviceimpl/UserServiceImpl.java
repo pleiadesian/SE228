@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import wzl.ebook.dao.UserInfoRepository;
 import wzl.ebook.dao.UserMapper;
 import wzl.ebook.entity.User;
+import wzl.ebook.entity.UserInfo;
 import wzl.ebook.service.UserService;
 
 import java.util.List;
@@ -15,6 +17,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserInfoRepository userInfoRepository;
 
     @Override
     public User handleLogin(String username, String password) {
@@ -59,5 +64,39 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<User> changeUserAuth(int id, boolean auth) {
+        User user = userMapper.selectByPrimaryKey(id);
+
+        // Frontend user list is dirty, change it with new list
+        if (user == null) return userMapper.selectAll();
+
+        // Admin can't change admin's auth
+        if (user.getUsertype().equals("admin")) return null;
+
+        user.setDisabled(auth);
+
+        userMapper.updateByPrimaryKey(user);
+        return userMapper.selectAll();
+    }
+
+    @Override
+    public void saveUserInfo(int id, String address, String gender, String telephone, String img) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(id);
+        userInfo.setAddress(address);
+        userInfo.setGender(gender);
+        userInfo.setTelephone(telephone);
+        userInfo.setImg(img);
+
+        userInfoRepository.save(userInfo);
+    }
+
+    @Override
+    public UserInfo getUserInfo(int id) {
+        UserInfo userInfo = userInfoRepository.findById(id);
+        return userInfo;
     }
 }
