@@ -60,4 +60,20 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
+    @Override
+    public List<User> changeUserAuth(int id, boolean auth) {
+        User user = userMapper.selectByPrimaryKey(id);
+
+        // Frontend user list is dirty, change it with new list
+        if (user == null) return userMapper.selectAll();
+
+        // Admin can't change admin's auth
+        if (user.getUsertype().equals("admin")) return null;
+
+        user.setDisabled(auth);
+
+        userMapper.updateByPrimaryKey(user);
+        return userMapper.selectAll();
+    }
 }

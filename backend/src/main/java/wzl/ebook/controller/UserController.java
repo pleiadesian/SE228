@@ -34,7 +34,19 @@ public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public List<User> getUserTable() {
-        System.out.println("Searching user info……");
+        System.out.println("Searching user info...");
         return userService.findAllUser();
+    }
+
+    @RequestMapping(value = "/userForbid", method = RequestMethod.GET)
+    public List<User> forbidUser(@RequestParam("userId") int userId) {
+        System.out.println("Searching for user...");
+        return userService.changeUserAuth(userId, true);
+    }
+
+    @RequestMapping(value = "/userFree", method = RequestMethod.GET)
+    public List<User> freeUser(@RequestParam("userId") int userId) {
+        System.out.println("Searching for user...");
+        return userService.changeUserAuth(userId, false);
     }
 }

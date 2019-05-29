@@ -12,4 +12,6 @@ public interface UserService {
     boolean handleRegister(String username, String password, String mail);
 
     List<User> findAllUser();
+
+    List<User> changeUserAuth(int id, boolean auth);
 }

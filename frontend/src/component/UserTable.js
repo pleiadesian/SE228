@@ -7,13 +7,17 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import axios from "axios";
+import Alert from "./Alert";
 
 class UserTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users:[]
+            users:[],
+            content:""
         };
+        this.handleForbidden = this.handleForbidden.bind(this);
+        this.handleFree = this.handleFree.bind(this);
         this.goGetData = this.goGetData.bind(this);
         this.goGetData();
     }
@@ -24,13 +28,45 @@ class UserTable extends Component {
             .then(res => {
                     console.log("get user table:");
                     console.log(res.data);
-                    this.setState({users: res.data});
+                    if(res.data[0] != null) {
+                        this.setState({users: res.data});
+                    }
                 }
             )
     }
 
+    async handleForbidden(id) {
+        await axios.get('/book/userForbid',{
+            params:{
+                "userId" : id
+            }
+        }).then(res =>{
+            if(res.data[0] != null) {
+                this.setState({users: res.data, content: "禁用成功"})
+            }else{
+                this.setState({content: "您无法修改管理员的权限"})
+            }
+        })
+    }
+
+    async handleFree(id) {
+        await axios.get('/book/userFree',{
+            params:{
+                "userId" : id
+            }
+        }).then(res =>{
+            if(res.data[0] != null) {
+                this.setState({users: res.data, content:"解禁成功"})
+            }else{
+                this.setState({content: "您无法修改管理员的权限"})
+            }
+        })
+    }
+
     render() {
         return (
+            <div>
+            <Alert content={this.state.content}/>
             <Paper id={"mainAdmin"}>
                 <Table className="table">
                     <TableHead>
@@ -42,12 +78,21 @@ class UserTable extends Component {
                                 用户类型
                             </TableCell>
                             <TableCell align="center">
+                                状态
+                            </TableCell>
+                            <TableCell align="center">
                                 操作
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {this.state.users.map((item, index) => {
+                            var state;
+                            if(item.disabled === false){
+                                state="正常";
+                            }else{
+                                state="已禁用";
+                            }
                             return (
                                 <TableRow key={index} >
                                     <TableCell component="th" scope="row">
@@ -57,8 +102,11 @@ class UserTable extends Component {
                                         {item.usertype}
                                     </TableCell>
                                     <TableCell align="center">
-                                        <Button>禁用</Button>
-                                        <Button>解禁</Button>
+                                        {state}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <Button onClick={this.handleForbidden.bind(this,item.id)}>禁用</Button>
+                                        <Button onClick={this.handleFree.bind(this,item.id)}>解禁</Button>
                                     </TableCell>
                                 </TableRow>
                             )
@@ -66,6 +114,7 @@ class UserTable extends Component {
                     </TableBody>
                 </Table>
             </Paper>
+            </div>
         );
     }
 }
