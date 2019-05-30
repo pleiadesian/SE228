@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONObject;
+import org.springframework.web.multipart.MultipartFile;
 import wzl.ebook.entity.User;
 import wzl.ebook.entity.UserInfo;
 import wzl.ebook.service.UserService;
@@ -78,7 +78,14 @@ public class UserController {
     @RequestMapping(value = "/saveUserInfo", method = RequestMethod.GET)
     public void saveUserInfo(@RequestParam("userId") int userId,@RequestParam("address") String address,
                              @RequestParam("gender") String gender,@RequestParam("telephone") String telephone,
-                             @RequestParam("img") String img) {
+                             @RequestParam("bookcover") String img) {
         userService.saveUserInfo(userId, address, gender, telephone, img);
     }
+
+    @RequestMapping(value = "/saveUserAvatar", method = RequestMethod.GET)
+    public void saveUserAvatar(@RequestParam("userId") int userId, @RequestParam(value = "file", required = false) MultipartFile file) {
+        System.out.println("Saving image...");
+        userService.saveUserAvatar(file, userId);
+    }
+
 }

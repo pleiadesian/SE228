@@ -4,12 +4,16 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import wzl.ebook.dao.UserInfoRepository;
 import wzl.ebook.dao.UserMapper;
 import wzl.ebook.entity.User;
 import wzl.ebook.entity.UserInfo;
 import wzl.ebook.service.UserService;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 @Service
@@ -98,5 +102,31 @@ public class UserServiceImpl implements UserService {
     public UserInfo getUserInfo(int id) {
         UserInfo userInfo = userInfoRepository.findById(id);
         return userInfo;
+    }
+
+    @Override
+    public void saveUserAvatar(MultipartFile file, int userId) {
+        if (!file.isEmpty()) {
+            String resName = "src/main/resources/static/img/";
+            String fileName = file.getOriginalFilename();
+            fileName = fileName.substring(fileName.lastIndexOf("."));
+            File saveFile= new File(resName + fileName);
+            if (!saveFile.getParentFile().exists()) {
+                saveFile.getParentFile().mkdirs();
+            }
+
+            try {
+                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(saveFile));
+                out.write(file.getBytes());
+                out.flush();
+                out.close();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            UserInfo userInfo = userInfoRepository.findById(userId);
+            userInfo.setImg(fileName);
+            userInfoRepository.save(userInfo);
+        }
     }
 }
