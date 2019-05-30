@@ -24,9 +24,6 @@ create table users
      usertype varchar(10),
      disabled tinyint(1),
 	 mail varchar(100),
-     gender varchar(10),
-     address varchar(100),
-     telephone varchar(20),
 	 primary key (id)
 	);
     
