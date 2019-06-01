@@ -7,6 +7,7 @@ import Order from './Order';
 import AdminUser from './AdminUser';
 import {Route, Switch} from "react-router";
 import {HashRouter as Router} from "react-router-dom";
+import UserInfo from "./UserInfo";
 
 class MainRouter extends Component {
     render () {
@@ -22,6 +23,7 @@ class MainRouter extends Component {
                     <Route path="/admin/book" component={BookList}/>
                     <Route path="/admin/order" component={Order}/>
                     <Route path="/order" component={Order}/>
+                    <Route path="/userInfo" component={UserInfo}/>
                 </Switch>
             </Router>
         )

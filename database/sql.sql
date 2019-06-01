@@ -68,26 +68,26 @@ insert into book (name,enabled,img,price,isbn,storage,author,area,press,time) va
 insert into book (name,enabled,img,price,isbn,storage,author,area,press,time) values("重构：改善既有代码的设计" ,1,"./img/book10.jpg",168.00,
 	" 9787115508645",10,"马丁.福勒","美国","人民邮电出版社","2005年4月"); 
     
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("aaa","111","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("bbb","111","user",1,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("frank","123","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("tiao","114","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("angel","199","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("jane","290","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("adam","290","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("mix","224","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("kick","360","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("july","440","admin",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("rose","330","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("ann","770","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("moow","444","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("jack","245","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("tim","133","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("lily","222","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("kookon","333","user",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("john","211","admin",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("alex","998","admin",0,"");
-insert into users (username,password,usertype,disabled,mail,address,telephone) values("lulu","200","admin",0,"");
+insert into users (username,password,usertype,disabled,mail) values("aaa","111","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("bbb","111","user",1,"");
+insert into users (username,password,usertype,disabled,mail) values("frank","123","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("tiao","114","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("angel","199","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("jane","290","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("adam","290","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("mix","224","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("kick","360","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("july","440","admin",0,"");
+insert into users (username,password,usertype,disabled,mail) values("rose","330","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("ann","770","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("moow","444","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("jack","245","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("tim","133","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("lily","222","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("kookon","333","user",0,"");
+insert into users (username,password,usertype,disabled,mail) values("john","211","admin",0,"");
+insert into users (username,password,usertype,disabled,mail) values("alex","998","admin",0,"");
+insert into users (username,password,usertype,disabled,mail) values("lulu","200","admin",0,"");
 
 insert into orders (money,user_id,ordertime) values(102.40,1,"2019-3-1");
 insert into orders (money,user_id,ordertime) values(200.10,1,"2019-2-1");

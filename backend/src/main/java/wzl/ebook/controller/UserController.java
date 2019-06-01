@@ -77,9 +77,8 @@ public class UserController {
 
     @RequestMapping(value = "/saveUserInfo", method = RequestMethod.GET)
     public void saveUserInfo(@RequestParam("userId") int userId,@RequestParam("address") String address,
-                             @RequestParam("gender") String gender,@RequestParam("telephone") String telephone,
-                             @RequestParam("bookcover") String img) {
-        userService.saveUserInfo(userId, address, gender, telephone, img);
+                             @RequestParam("gender") String gender,@RequestParam("telephone") String telephone) {
+        userService.saveUserInfo(userId, address, gender, telephone);
     }
 
     @RequestMapping(value = "/saveUserAvatar", method = RequestMethod.GET)
