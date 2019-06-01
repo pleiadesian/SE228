@@ -87,13 +87,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUserInfo(int id, String address, String gender, String telephone, String img) {
+    public void saveUserInfo(int id, String address, String gender, String telephone) {
         UserInfo userInfo = new UserInfo();
         userInfo.setId(id);
         userInfo.setAddress(address);
         userInfo.setGender(gender);
         userInfo.setTelephone(telephone);
-        userInfo.setImg(img);
+        userInfo.setImg("avatar.jpg");
 
         userInfoRepository.save(userInfo);
     }

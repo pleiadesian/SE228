@@ -125,6 +125,20 @@ class Header extends Component {
                 return (<Redirect to={"/login"}/>);
         }
 
+        var login = cookie.load("login");
+        var img;
+        if (login == null || login !=="true") {
+            img = (<img src={require("./img/avatar.jpg")} className={"avatarImg"} />)
+        }else{
+            img = (
+                <Link to={"/userInfo"}>
+                    <img src={require("./img/avatar.jpg")} className={"avatarImg"} />
+                </Link>
+            )
+        }
+
+
+
         return (
             <div id="header">
                 <Alert content={this.state.content}/>
@@ -136,7 +150,7 @@ class Header extends Component {
                 </div>
                 <div id={"userInfo"}>
                     <div className={"avatar"}>
-                        <img src={require("./img/avatar.jpg")} className={"avatarImg"} />
+                        {img}
                     </div>
                     <div className={"username"}>
                         <h3>{this.state.username}</h3>

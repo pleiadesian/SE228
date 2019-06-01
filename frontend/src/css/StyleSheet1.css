@@ -19,7 +19,7 @@ body {
 	height:100%;
 	width:100%;
 }
-ƒ
+
 h1 {
 	color: #3E3E3E;
 	font-size: 42px;
@@ -212,4 +212,36 @@ ul {
 
 	#footer ul li a{
 		font-size: 20px;
+	}
+
+	#userInfoTitle{
+		width:100%;
+		margin: 50px auto;
+	}
+
+	#backButtonWrapper{
+		float:right;
+		width:100px;
+	}
+
+	#userInfoAvatar{
+		float:left;
+		width:700px;
+		height:300px;
+	}
+
+	#userInfoForm{
+		float:right;
+		width:700px;
+		height:300px;
+	}
+
+	#inputWrapper{
+		margin: 10px auto;
+	}
+
+	.avatarBigImg{
+		transform:scale(3);
+		position:relative;
+		top:50px;
 	}
