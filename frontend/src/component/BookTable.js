@@ -177,30 +177,6 @@ class BookTable extends Component {
         }
     }
 
-    // Send bookId, attribute to change, new value to backend
-/*
-    async handleBookChange(id, attrName, newValue) {
-        console.log("new book:");
-        console.log(id);
-        console.log(attrName);
-        console.log(newValue);
-        await axios.get('/book/changeBookInfo',{
-            params: {
-                "bookId" : id,
-                "attrName" : attrName,
-                "newValue" : newValue
-            }
-        }).then( res =>{
-            console.log("after admin change a book:");
-            console.log(res.data);
-            if (res.data == null){
-                this.handleAlert("修改失败");
-            }else {
-                this.setState({bookArr: res.data})
-            }
-        })
-    }*/
-
     async handleAddCart(bookid) {
         var userInfo = cookie.load("userInfo");
         if (userInfo == null) {
@@ -357,7 +333,9 @@ class BookTable extends Component {
                 book = item;
             }
             if(book.img == null){
-                book.img = "./img/img_default.jpg"
+                book.img = "http://localhost:8080/book/img/book/img_default.jpg";
+            }else{
+                book.img = "http://localhost:8080/book/"+book.img;
             }
             bookColumns.push(
                 <li className="bookColumn">
@@ -365,7 +343,7 @@ class BookTable extends Component {
                         <div className={"columnBlock"} id={"imgBlock"}>
                             <Link to={this.handleLink(book.id)} className="bookcover">
                                 <img
-                                    src={require( "" + book.img)}
+                                    src={book.img}
                                     alt={book.name}
                                     className="bookimage"
                                 />

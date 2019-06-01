@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import wzl.ebook.entity.Book;
 import wzl.ebook.service.BookService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -45,5 +47,14 @@ public class BookController {
     public List<Book> addBook(@RequestParam("bookInfo") String bookStr) {
         System.out.println("updateing book list...");
         return bookService.addOneBook(bookStr);
+    }
+
+    @RequestMapping(value = "/saveBookCover", method = RequestMethod.POST)
+    public void saveBookAvatar(HttpServletRequest request, @RequestParam("cover") MultipartFile file) {
+        System.out.println("Saving image...");
+        int id = Integer.valueOf(request.getParameter("bookId"));
+        if (id > 0) {
+            bookService.saveBookCover(file, id);
+        }
     }
 }

@@ -47,28 +47,49 @@ class Avatar extends Component {
     };
 
     render() {
+        var content = this.props.bookId? "更换封面" : "更换头像";
         const uploadButton = (
             <div>
                 <Icon type={this.state.loading ? 'loading' : 'plus'} />
-                <div className="ant-upload-text">更换头像</div>
+                <div className="ant-upload-text">{content}</div>
             </div>
         );
         const imageUrl = this.state.imageUrl;
         var userId = cookie.load("userInfo").id;
-        return (
-            <Upload
-                name="avatar"
-                data={{userId : userId}}
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={false}
-                action="/book/saveUserAvatar"
-                beforeUpload={beforeUpload}
-                onChange={this.handleChange}
-            >
-                {imageUrl ? <img src={imageUrl} alt="avatar" className={"avatarUploadImg"}/> : uploadButton}
-            </Upload>
-        );
+        var bookId = 0;
+        console.log(this.props.bookId);
+        if (this.props.bookId) {
+            bookId = this.props.bookId;
+            return (
+                <Upload
+                    name="cover"
+                    data={{bookId: bookId}}
+                    listType="picture-card"
+                    className="avatar-uploader"
+                    showUploadList={false}
+                    action="/book/saveBookCover"
+                    beforeUpload={beforeUpload}
+                    onChange={this.handleChange}
+                >
+                    {imageUrl ? <img src={imageUrl} alt="avatar" className={"avatarUploadImg"}/> : uploadButton}
+                </Upload>
+            );
+        }else {
+            return (
+                <Upload
+                    name="avatar"
+                    data={{userId: userId}}
+                    listType="picture-card"
+                    className="avatar-uploader"
+                    showUploadList={false}
+                    action="/book/saveUserAvatar"
+                    beforeUpload={beforeUpload}
+                    onChange={this.handleChange}
+                >
+                    {imageUrl ? <img src={imageUrl} alt="avatar" className={"avatarUploadImg"}/> : uploadButton}
+                </Upload>
+            );
+        }
     }
 }
 

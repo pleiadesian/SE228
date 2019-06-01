@@ -124,7 +124,7 @@ public class UserServiceImpl implements UserService {
             }
 
             UserInfo userInfo = userInfoRepository.findById(1);
-            userInfo.setImg(fileName);
+            userInfo.setImg("img/user/"+fileName);
             userInfoRepository.save(userInfo);
         }
     }

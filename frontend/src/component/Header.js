@@ -126,18 +126,25 @@ class Header extends Component {
         }
 
         var login = cookie.load("login");
+
+        var userInfo = cookie.load("userInfo");
+        var avatarUrl;
+        if (userInfo == null) {
+            avatarUrl = "http://localhost:8080/book/img/user/avatar.jpg"
+        }else{
+            avatarUrl = "http://localhost:8080/book/img/user/"+userInfo.id+".jpg";
+        }
+
         var img;
         if (login == null || login !=="true") {
-            img = (<img src={require("./img/avatar.jpg")} className={"avatarImg"} />)
+            img = (<img src={avatarUrl} className={"avatarImg"} />)
         }else{
             img = (
                 <Link to={"/userInfo"}>
-                    <img src={require("./img/avatar.jpg")} className={"avatarImg"} />
+                    <img src={avatarUrl} className={"avatarImg"} />
                 </Link>
             )
         }
-
-
 
         return (
             <div id="header">
