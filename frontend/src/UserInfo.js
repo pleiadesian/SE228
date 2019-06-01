@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import cookie from "react-cookies";
 import Alert from "./component/Alert";
+import Avatar from "./component/Avatar";
 
 class UserInfo extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class UserInfo extends Component {
             address : "",
             gender : "",
             telephone : "",
+            avatar: "",
             content : ""
         };
 
@@ -47,7 +49,8 @@ class UserInfo extends Component {
                         this.setState({
                             address : res.data.address,
                             gender : res.data.gender,
-                            telephone : res.data.telephone
+                            telephone : res.data.telephone,
+                            avatar : res.data.img
                         })
                     }
             })
@@ -81,6 +84,7 @@ class UserInfo extends Component {
         if (userInfo!=null){
             username = userInfo.username;
         }
+        var avatarUrl = "http://localhost:8080/book/img/user/"+this.state.avatar;
         return(
             <div>
                 <Alert content={this.state.content}/>
@@ -93,7 +97,10 @@ class UserInfo extends Component {
                 </div>
                 <div id={"userInfoWrapper"}>
                     <div id = {"userInfoAvatar"}>
-                        <img src={require("./img/avatar.jpg")} className={"avatarBigImg"} />
+                        <img src={avatarUrl} className={"avatarBigImg"} />
+                        <div  className={"avatarUpload"}>
+                            <Avatar/>
+                        </div>
                     </div>
                     <div id = {"userInfoForm"}>
                         <div className={"inputWrapper"}>

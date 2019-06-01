@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import wzl.ebook.entity.User;
 import wzl.ebook.entity.UserInfo;
 import wzl.ebook.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -81,10 +83,11 @@ public class UserController {
         userService.saveUserInfo(userId, address, gender, telephone);
     }
 
-    @RequestMapping(value = "/saveUserAvatar", method = RequestMethod.GET)
-    public void saveUserAvatar(@RequestParam("userId") int userId, @RequestParam(value = "file", required = false) MultipartFile file) {
+    @RequestMapping(value = "/saveUserAvatar", method = RequestMethod.POST)
+    public void saveUserAvatar(HttpServletRequest request,@RequestParam("avatar") MultipartFile file) {
         System.out.println("Saving image...");
-        userService.saveUserAvatar(file, userId);
+        int id = Integer.valueOf(request.getParameter("userId"));
+        userService.saveUserAvatar(file, id);
     }
 
 }
