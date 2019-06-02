@@ -4,10 +4,15 @@ package wzl.ebook.serviceimpl;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import wzl.ebook.dao.BookMapper;
 import wzl.ebook.entity.Book;
+import wzl.ebook.entity.UserInfo;
 import wzl.ebook.service.BookService;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -95,6 +100,32 @@ public class BookServiceImpl implements BookService {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public void saveBookCover(MultipartFile file, int bookId) {
+        if (!file.isEmpty()) {
+            String resName = "src/main/resources/static/img/book/";
+            String fileName = bookId + ".jpg";
+
+            File saveFile= new File(resName + fileName);
+            if (!saveFile.getParentFile().exists()) {
+                saveFile.getParentFile().mkdirs();
+            }
+
+            try {
+                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(saveFile));
+                out.write(file.getBytes());
+                out.flush();
+                out.close();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Book newBook = bookMapper.selectByPrimaryKey(bookId);
+            newBook.setImg("img/book/"+fileName);
+            bookMapper.updateByPrimaryKey(newBook);
         }
     }
 }

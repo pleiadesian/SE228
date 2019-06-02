@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import wzl.ebook.entity.User;
 import wzl.ebook.entity.UserInfo;
 import wzl.ebook.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -61,30 +63,12 @@ public class UserController {
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
     public UserInfo getUserInfo(@RequestParam("userId") int userId) {
        return userService.getUserInfo(userId);
-
-
-       /* UserInfo userInfo = new UserInfo();
-        userInfo.setAddress("1");
-        userInfo.setGender("2");
-        userInfo.setImg("3");
-        userInfo.setTelephone("4");
-        mongoOperations.save(userInfo, "users");
-        Query query = new Query(Criteria.where("Address").is("1"));
-        UserInfo userGetFromMdb = mongoOperations.findOne(query, UserInfo.class, "users");
-        System.out.println(userGetFromMdb.getGender());
-        return userGetFromMdb;*/
     }
 
     @RequestMapping(value = "/saveUserInfo", method = RequestMethod.GET)
     public void saveUserInfo(@RequestParam("userId") int userId,@RequestParam("address") String address,
                              @RequestParam("gender") String gender,@RequestParam("telephone") String telephone) {
         userService.saveUserInfo(userId, address, gender, telephone);
-    }
-
-    @RequestMapping(value = "/saveUserAvatar", method = RequestMethod.GET)
-    public void saveUserAvatar(@RequestParam("userId") int userId, @RequestParam(value = "file", required = false) MultipartFile file) {
-        System.out.println("Saving image...");
-        userService.saveUserAvatar(file, userId);
     }
 
 }

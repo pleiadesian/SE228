@@ -63,7 +63,7 @@ ul {
 
 /*页面大标题*/
 #caption {
-    margin: 10px 50px;
+    margin: 3px 50px;
     width: 200px;
     text-align: center;
     float:left;
@@ -104,18 +104,22 @@ ul {
 }
 
 #userInfo{
-    margin:20px 50px 0 50px;
-    width:100px;
+    margin:20px 20px 0 50px;
+    width:130px;
 }
 #userInfo .avatar{
     float:left;
     height: 100%;
     width:30%;
 }
+.avatarImg{
+    height:50px;
+    width:50px;
+}
 #userInfo .username{
     float:right;
     height:100%;
-    width:70%;
+    width:60%;
 }
 .username h3{
     margin:0;
