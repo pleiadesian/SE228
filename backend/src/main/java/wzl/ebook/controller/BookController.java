@@ -48,13 +48,4 @@ public class BookController {
         System.out.println("updateing book list...");
         return bookService.addOneBook(bookStr);
     }
-
-    @RequestMapping(value = "/saveBookCover", method = RequestMethod.POST)
-    public void saveBookAvatar(HttpServletRequest request, @RequestParam("cover") MultipartFile file) {
-        System.out.println("Saving image...");
-        int id = Integer.valueOf(request.getParameter("bookId"));
-        if (id > 0) {
-            bookService.saveBookCover(file, id);
-        }
-    }
 }

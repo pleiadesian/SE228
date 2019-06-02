@@ -57,39 +57,25 @@ class Avatar extends Component {
         const imageUrl = this.state.imageUrl;
         var userId = cookie.load("userInfo").id;
         var bookId = 0;
-        console.log(this.props.bookId);
         if (this.props.bookId) {
+            console.log("this.props.bookId");
+            console.log(this.props.bookId);
             bookId = this.props.bookId;
-            return (
-                <Upload
-                    name="cover"
-                    data={{bookId: bookId}}
-                    listType="picture-card"
-                    className="avatar-uploader"
-                    showUploadList={false}
-                    action="/book/saveBookCover"
-                    beforeUpload={beforeUpload}
-                    onChange={this.handleChange}
-                >
-                    {imageUrl ? <img src={imageUrl} alt="avatar" className={"avatarUploadImg"}/> : uploadButton}
-                </Upload>
-            );
-        }else {
-            return (
-                <Upload
-                    name="avatar"
-                    data={{userId: userId}}
-                    listType="picture-card"
-                    className="avatar-uploader"
-                    showUploadList={false}
-                    action="/book/saveUserAvatar"
-                    beforeUpload={beforeUpload}
-                    onChange={this.handleChange}
-                >
-                    {imageUrl ? <img src={imageUrl} alt="avatar" className={"avatarUploadImg"}/> : uploadButton}
-                </Upload>
-            );
         }
+        return (
+            <Upload
+                name="avatar"
+                data={{userId: userId, bookId: bookId}}
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                action="/book/saveAvatar"
+                beforeUpload={beforeUpload}
+                onChange={this.handleChange}
+            >
+                {imageUrl ? <img src={imageUrl} alt="avatar" className={"avatarUploadImg"}/> : uploadButton}
+            </Upload>
+        );
     }
 }
 
