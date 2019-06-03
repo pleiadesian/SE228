@@ -43,7 +43,7 @@
       password = #{password,jdbcType=VARCHAR},
       usertype = #{usertype,jdbcType=VARCHAR},
       disabled = #{disabled,jdbcType=BIT},
-      mail = #{mail,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">

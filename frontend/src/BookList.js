@@ -19,7 +19,8 @@ class BookList extends Component {
             search : false,
             bookArr: [],
             tempBookArr : [],
-            content: ""
+            content: "",
+            edit: false
         };
 
         this.handleAlert = this.handleAlert.bind(this);
@@ -66,31 +67,35 @@ class BookList extends Component {
 
     // Get book list from cookie and send to back end
     async handleUpdate() {
-        var booklist= this.state.tempBookArr;
-        if (booklist == null) {
-            this.handleAlert("未修改任何值");
-        }else{
-            console.log("get book list from cookie:");
-            console.log(booklist);
-           // booklist = JSON.parse(booklist);
+        if(!this.state.edit) {
+            this.handleAlert("请先进入编辑状态")
+        }else {
+            var booklist = this.state.tempBookArr;
+            if (booklist == null) {
+                this.handleAlert("未修改任何值");
+            } else {
+                console.log("get book list from cookie:");
+                console.log(booklist);
                 var params = new URLSearchParams();
-                params.append('booklist',JSON.stringify(booklist));
-            await axios.post('/book/changeBookInfo',params)
-                .then( res =>{
-                console.log("after admin change a book:");
-                console.log(res.data);
-                if (res.data[0] == null){
-                    this.handleAlert("修改后的数据不合法，修改失败");
-                }else {
-                    this.handleAlert('更新成功');
-                    this.setState({bookArr: res.data})
-                }
-            })
+                params.append('booklist', JSON.stringify(booklist));
+                await axios.post('/book/changeBookInfo', params)
+                    .then(res => {
+                        console.log("after admin change a book:");
+                        console.log(res.data);
+                        if (res.data[0] == null) {
+                            this.handleAlert("修改后的数据不合法，修改失败");
+                        } else {
+                            this.handleAlert('更新成功');
+                            this.setState({bookArr: res.data, edit: false})
+                        }
+                    })
+            }
         }
     }
 
-    handleBookTableChange(bookArr) {
+    handleBookTableChange(bookArr, edit) {
         this.state.tempBookArr = bookArr;
+        this.state.edit = edit
     }
 
     handleAddBook(res_data) {
@@ -132,7 +137,7 @@ class BookList extends Component {
 
         return (
             <div>
-                <Alert content={this.state.content}/>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
                 <Header
                     onSearchChange = {this.handleSearchChange}
                 />

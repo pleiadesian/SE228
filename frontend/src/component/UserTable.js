@@ -93,13 +93,19 @@ class UserTable extends Component {
                             }else{
                                 state="已禁用";
                             }
+                            var userType;
+                            if (item.usertype === "user"){
+                                userType = "顾客";
+                            }else{
+                                userType = "管理员";
+                            }
                             return (
                                 <TableRow key={index} >
                                     <TableCell component="th" scope="row">
                                         {item.username}
                                     </TableCell>
                                     <TableCell align="center">
-                                        {item.usertype}
+                                        {userType}
                                     </TableCell>
                                     <TableCell align="center">
                                         {state}

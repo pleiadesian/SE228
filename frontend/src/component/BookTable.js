@@ -27,11 +27,13 @@ class BookTable extends Component {
         this.state = {
             bookArr : this.props.bookArr,
             admin : admin,
-            content : ""
+            content : "",
+            edit : false                    // admin is editting data, book table can't be sorted
         };
         this.handleAlert = this.handleAlert.bind(this);
         this.handleInput=this.handleInput.bind(this);
         this.handleDelete=this.handleDelete.bind(this);
+        this.handleEditBegin = this.handleEditBegin.bind(this);
         this.handleQuantityChange = this.handleQuantityChange.bind(this);
         this.handleAddCart= this.handleAddCart.bind(this);
         this.handleAdminChange = this.handleAdminChange.bind(this);
@@ -47,7 +49,7 @@ class BookTable extends Component {
 
     // Rerender when get new book array from parent component
     componentWillReceiveProps(nextProps, nextContext) {
-        this.setState({bookArr : nextProps.bookArr})
+        this.setState({bookArr : nextProps.bookArr, edit: nextProps.edit, content: ""});
     }
 
     // Url of book info page
@@ -58,8 +60,6 @@ class BookTable extends Component {
     // Filter books according to user input
     filter(filterText) {
         // Display book array json in console
-        console.log("filter bookArr:");
-        console.log(this.state.bookArr);
         if (this.state.bookArr[0] != null) {
             this.state.bookArr.forEach((item, index) => {
                 // take book JSONObject out, push whole JSON complex Object back(containing quantity and bookinfo)
@@ -240,7 +240,7 @@ class BookTable extends Component {
         }else{
             admin = true;
         }
-        if (admin) {
+        if (admin && this.state.edit) {
             return (
                 <div>
                     <h2>
@@ -299,22 +299,27 @@ class BookTable extends Component {
             return;
         }
 
+        // change attribute in the corresponding book
         this.state.bookArr.forEach((item,index) => {
             if (item.id === bookid) {
                 item[attrName] = e.target.value;
                 console.log("after admin change.booklist is:");
                 console.log(this.state.bookArr);
-                //this.handleBookChange(item.id, attrName, e.target.value);  // bookId, attribute to change, new value
             }
         });
         // send book array to parent component
         if (this.props.onChange) {
-            this.props.onChange(this.state.bookArr);
+            this.props.onChange(this.state.bookArr, this.state.edit);
         }
     }
 
     handleAlert(content) {
         this.setState({content : content})
+    }
+
+
+    handleEditBegin() {
+        this.setState({edit: true});
     }
 
     render() {
@@ -323,6 +328,8 @@ class BookTable extends Component {
         this.filter(this.props.filterText);
         this.sort(this.props.sortAttr,this.props.sortType);
         var bookColumns = [];
+        console.log("book table after render:");
+        console.log(renderArr);
         if (!(renderArr === false)){
         renderArr.forEach((item, index)=>{
             // Get book attr from itemAttr JSON when in cart page(item:{book:{},quantity})
@@ -361,9 +368,24 @@ class BookTable extends Component {
                 </li>
             )
         });}
+        var admin = cookie.load("admin");
+        if (admin == null || admin !== "true") {
+            admin = false;
+        }else{
+            admin = true;
+        }
+        var handleEdit = !admin || this.state.edit ? "" :
+            (< input
+            type="submit"
+            value="开始编辑"
+            id="submitUpdate"
+            className="button"
+            onClick={this.handleEditBegin}
+            />);
         return (
             <div id = "mainBooklist" className={"main"}>
                 <Alert content={this.state.content}/>
+                {handleEdit}
                 <ul>
                     {bookColumns}
                 </ul>
