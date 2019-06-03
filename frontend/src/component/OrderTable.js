@@ -60,7 +60,41 @@ class OrderTable extends Component {
             admin = true;
         }
 
+        var userCost = 0.0;
+        var bookSale = 0;
+        var userColumn = "";
+        var bookColumn = "";
+        if (this.props.userId) {
+            if(this.props.userId !== "" && this.props.userId > 0) {
+                this.state.orders.map((item) => {
+                    if (item.userId == this.props.userId) {
+                        userCost += item.money;
+                    }
+                })
+                userColumn = (
+                    <h2>用户总消费：{userCost}</h2>
+                );
+            }
+        }
+        if (this.props.bookId && admin) {
+            if(this.props.bookId !== "" && this.props.bookId > 0) {
+                this.state.orders.map((item) => {
+                    item.orderitems.map((orderitem)=>{
+                        if (orderitem.bookId == this.props.bookId) {
+                            bookSale += orderitem.num;
+                        }
+                    })
+                })
+                bookColumn = (
+                    <h2>书籍总销量：{bookSale}</h2>
+                );
+            }
+        }
+
         return (
+            <div>
+                {userColumn}
+                {bookColumn}
             <Paper id={"mainAdmin"}>
                 <Table className="table">
                     <TableHead>
@@ -85,37 +119,51 @@ class OrderTable extends Component {
                     <TableBody>
                         {this.state.orders.map((item) => {
                             // Is order time between start date and end date from user input?
-                            if (moment(item.ordertime).isBetween(moment(this.props.startDate),moment(this.props.endDate)) ||
-                                moment(item.ordertime).isSame(this.props.endDate) || moment(item.ordertime).isSame(this.props.startDate)) {
-                                return(
-                                    //  遍历订单中每一个物品
-                                item.orderitems.map((orderitem) =>{
+                                if (moment(item.ordertime).isBetween(moment(this.props.startDate), moment(this.props.endDate)) ||
+                                    moment(item.ordertime).isSame(this.props.endDate) || moment(item.ordertime).isSame(this.props.startDate)) {
                                     return (
-                                        <TableRow>
-                                            <TableCell component="th" scope="row">
-                                                {item.id}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                {item.ordertime}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                {item.userId}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                {orderitem.bookId}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                {orderitem.num}
-                                            </TableCell>
-                                        </TableRow>
+                                        //  遍历订单中每一个物品
+                                        item.orderitems.map((orderitem) => {
+                                            var valid = true;
+                                            if (this.props.userId) {
+                                                if(this.props.userId !== "" && this.props.userId > 0  && this.props.userId != item.userId) {
+                                                    valid = false;
+                                                }
+                                            }
+                                            if (this.props.bookId) {
+                                                if(this.props.bookId !== "" && this.props.bookId > 0  && this.props.bookId != orderitem.bookId) {
+                                                    valid = false;
+                                                }
+                                            }
+                                            if (valid) {
+                                                return (
+                                                    <TableRow>
+                                                        <TableCell component="th" scope="row">
+                                                            {item.id}
+                                                        </TableCell>
+                                                        <TableCell align="center">
+                                                            {item.ordertime}
+                                                        </TableCell>
+                                                        <TableCell align="center">
+                                                            {item.userId}
+                                                        </TableCell>
+                                                        <TableCell align="center">
+                                                            {orderitem.bookId}
+                                                        </TableCell>
+                                                        <TableCell align="center">
+                                                            {orderitem.num}
+                                                        </TableCell>
+                                                    </TableRow>
+                                                );
+                                            }
+                                        })
                                     )
-                                })
-                                )
-                            }
+                                }
                         })}
                     </TableBody>
                 </Table>
             </Paper>
+            </div>
         );
     }
 }

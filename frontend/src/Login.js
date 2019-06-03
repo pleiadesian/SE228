@@ -49,7 +49,7 @@ class Login extends Component {
                             this.handleAlert("登陆成功", 1);
                             this.setState({isValid: true});
                         }else{
-                            this.handleAlert("登陆失败", 1)
+                            this.handleAlert("您的账号已经被禁用", 1)
                         }
                     }
                     else {

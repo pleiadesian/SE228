@@ -21,12 +21,18 @@ class Alert extends Component {
         }
     }
     handleOk() {
+        if(this.props.cancelAlert){
+            this.props.cancelAlert("");
+        }
         this.setState({
             visible: false,
             content: ""
         })
     }
     handleCancel() {
+        if(this.props.cancelAlert){
+            this.props.cancelAlert("");
+        }
         this.setState({
             visible: false,
             content: ""
