@@ -332,10 +332,11 @@ class BookTable extends Component {
             }else{
                 book = item;
             }
+            var imgUrl;
             if(book.img == null){
-                book.img = "http://localhost:8080/book/img/book/img_default.jpg";
+                imgUrl = "http://localhost:8080/book/img/book/img_default.jpg";
             }else{
-                book.img = "http://localhost:8080/book/"+book.img;
+                imgUrl = "http://localhost:8080/book/"+book.img;
             }
             bookColumns.push(
                 <li className="bookColumn">
@@ -343,7 +344,7 @@ class BookTable extends Component {
                         <div className={"columnBlock"} id={"imgBlock"}>
                             <Link to={this.handleLink(book.id)} className="bookcover">
                                 <img
-                                    src={book.img}
+                                    src={imgUrl}
                                     alt={book.name}
                                     className="bookimage"
                                 />
