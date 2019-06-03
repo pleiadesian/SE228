@@ -12,20 +12,25 @@ class Order extends Component {
         const dateFormat = 'YYYY-MM-DD';
         this.state = {
             startDate : moment('2000-01-01').format(dateFormat),
-            endDate : moment().format(dateFormat)
+            endDate : moment().format(dateFormat),
+            userId : 0,
+            bookId : 0
         };
         this.handleDateChange = this.handleDateChange.bind(this)
     }
 
-    handleDateChange(startDate, endDate){
+    handleDateChange(startDate, endDate, userId, bookId){
         this.setState({
             startDate : startDate,
-            endDate : endDate
+            endDate : endDate,
+            userId : userId,
+            bookId : bookId
         })
     }
+
     render() {
         return (
-            <div >
+            <div>
                 <Header
                     admin={true}
                     login={true}
@@ -39,6 +44,8 @@ class Order extends Component {
                     <OrderTable
                         startDate = {this.state.startDate}
                         endDate = {this.state.endDate}
+                        userId = {this.state.userId}
+                        bookId = {this.state.bookId}
                     />
                 </div>
                 <Footer/>

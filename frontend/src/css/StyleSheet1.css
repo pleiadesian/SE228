@@ -258,3 +258,13 @@ ul {
 		top:100px;
 		right:100px;
 	}
+
+.leftBlock{
+	float:left;
+	width : 20%;
+	margin-left:300px;
+}
+
+.rightBlock{
+	float:left;
+}
