@@ -47,7 +47,7 @@ class BookTable extends Component {
         page : "booklist",
     }
 
-    // Rerender when get new book array from parent component
+    // Rerender when get new book array from parent component, close edit state when finish updating
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({bookArr : nextProps.bookArr, edit: nextProps.edit, content: ""});
     }
@@ -124,6 +124,11 @@ class BookTable extends Component {
                   }
                 }).then(res => {
                     this.setState({bookArr : res.data})
+                console.log("is changing parent state");
+                    console.log(this.state.bookArr);
+                    if(this.props.onDelete) {
+                        this.props.onDelete(this.state.bookArr);
+                    }
             })
         }else {
             // user delete book in cart

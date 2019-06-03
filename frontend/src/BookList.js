@@ -28,6 +28,7 @@ class BookList extends Component {
         this.handleSortChange = this.handleSortChange.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleBookDelete = this.handleBookDelete.bind(this);
         this.handleBookTableChange = this.handleBookTableChange.bind(this);
         this.goGetData = this.goGetData.bind(this);
         this.handleAddBook = this.handleAddBook.bind(this);
@@ -97,6 +98,9 @@ class BookList extends Component {
         this.state.tempBookArr = bookArr;
         this.state.edit = edit
     }
+    handleBookDelete(bookArr) {
+        this.state.bookArr= bookArr;
+    }
 
     handleAddBook(res_data) {
         this.setState({
@@ -150,6 +154,7 @@ class BookList extends Component {
                     bookArr={this.state.bookArr}
                     page="booklist"
                     admin={this.props.match.path.indexOf("admin") !== -1}
+                    onDelete={this.handleBookDelete}
                     onChange={this.handleBookTableChange} // when book array is modified in the admin page, book array here should be changed
                 />
                 <Footer/>
