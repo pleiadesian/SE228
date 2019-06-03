@@ -94,7 +94,7 @@ class BookInfo extends Component {
 		):"";
         return (
         	<div >
-				<Alert content={this.state.content}/>
+				<Alert content={this.state.content} cancelAlert={this.handleAlert}/>
 				<Header/>
 				<div  id={"mainBookinfo"} className={"main"}>
 					<div className={"bookImg"}>

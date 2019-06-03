@@ -81,7 +81,7 @@ class DatePicker extends Component {
             </div>) : "";
         return (
             <div>
-                <Alert content={this.state.content}/>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
                 <div className={"leftBlock"}>
                     <span>开始日期</span>
                     <input id="startDate" className="dateInput" type="text" onChange={this.handleChange}/><br/>

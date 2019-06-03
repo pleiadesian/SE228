@@ -18,6 +18,7 @@ class UserTable extends Component {
         };
         this.handleForbidden = this.handleForbidden.bind(this);
         this.handleFree = this.handleFree.bind(this);
+        this.handleAlert = this.handleAlert.bind(this);
         this.goGetData = this.goGetData.bind(this);
         this.goGetData();
     }
@@ -42,9 +43,10 @@ class UserTable extends Component {
             }
         }).then(res =>{
             if(res.data[0] != null) {
-                this.setState({users: res.data, content: "禁用成功"})
+                this.handleAlert("禁用成功");
+                this.setState({users: res.data})
             }else{
-                this.setState({content: "您无法修改管理员的权限"})
+                this.handleAlert("您无法修改管理员的权限");
             }
         })
     }
@@ -56,17 +58,22 @@ class UserTable extends Component {
             }
         }).then(res =>{
             if(res.data[0] != null) {
-                this.setState({users: res.data, content:"解禁成功"})
+                this.handleAlert("解禁成功");
+                this.setState({users: res.data})
             }else{
-                this.setState({content: "您无法修改管理员的权限"})
+                this.handleAlert("您无法修改管理员的权限");
             }
         })
+    }
+
+    handleAlert(content) {
+        this.setState({content : content})
     }
 
     render() {
         return (
             <div>
-            <Alert content={this.state.content}/>
+            <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
             <Paper id={"mainAdmin"}>
                 <Table className="table">
                     <TableHead>
