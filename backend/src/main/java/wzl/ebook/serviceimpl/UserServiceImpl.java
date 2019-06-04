@@ -2,6 +2,7 @@ package wzl.ebook.serviceimpl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,6 +58,26 @@ public class UserServiceImpl implements UserService {
         }catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public String geneAuthcode(String mail) {
+        HtmlEmail email = new HtmlEmail();
+        int code = (int) (Math.random()*9000+1000);
+        email.setHostName("smtp.qq.com");
+        email.setCharset("utf-8");
+        try {
+            email.addTo(mail);
+            email.setFrom("574402791@qq.com", "e-book");
+            email.setAuthentication("574402791@qq.com", "xjgewwvphtjibfib");
+            email.setSubject("欢迎注册e-book");
+            email.setMsg("您的验证码是："+code);
+            email.send();
+            return String.valueOf(code);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
     }
 
