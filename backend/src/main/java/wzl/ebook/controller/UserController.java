@@ -71,4 +71,9 @@ public class UserController {
         userService.saveUserInfo(userId, address, gender, telephone);
     }
 
+    @RequestMapping(value = "/authcode", method = RequestMethod.GET)
+    public String authcode(@RequestParam("mail") String mail) {
+        return userService.geneAuthcode(mail);
+    }
+
 }
