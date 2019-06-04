@@ -88,7 +88,7 @@ class AddBookForm extends Component {
     render() {
         return (
             <div>
-                <Alert content={this.state.content}/>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
                 <input type="submit" className="button" onClick={this.showModal} value="添加"/>
                 <Modal title="添加书籍信息" visible={this.state.visible}
                        onOk={this.handleOk} onCancel={this.handleCancel}

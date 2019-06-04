@@ -125,7 +125,7 @@ class Cart extends Component {
         this.getSum();
         return (
             <div>
-                <Alert content={this.state.content}/>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
                 <Header/>
                 <div className={"crossBar"}>
                     <h2>总金额：{sum}</h2>

@@ -78,7 +78,7 @@ class Header extends Component {
     }
 
     handleAlert(content) {
-        this.setState({content : "请先登录"})
+        this.setState({content : content})
     }
 
     handleNavi() {
@@ -90,7 +90,7 @@ class Header extends Component {
         );
         const unloginList = (
             <div>
-                <li><Link onClick={this.handleAlert}>购物车</Link></li>
+                <li><Link onClick={this.handleAlert.bind(this, "请先登录")}>购物车</Link></li>
                 <li><Link to={"/login"} id={"login"}>登录</Link><Link to={"/register"} id={"register"}>注册</Link></li>
             </div>
         );
@@ -148,7 +148,7 @@ class Header extends Component {
 
         return (
             <div id="header">
-                <Alert content={this.state.content}/>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
                 <div id="caption">
                     <h1>e-book</h1>
                 </div>

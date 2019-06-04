@@ -87,7 +87,7 @@ class UserInfo extends Component {
         var avatarUrl = "http://localhost:8080/book/img/user/"+this.state.avatar;
         return(
             <div>
-                <Alert content={this.state.content}/>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
                 <div id={"userInfoTitle"}>
                     <h1>用户信息</h1>
                     <p>用户名：{username}</p>

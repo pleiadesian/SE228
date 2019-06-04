@@ -389,7 +389,7 @@ class BookTable extends Component {
             />);
         return (
             <div id = "mainBooklist" className={"main"}>
-                <Alert content={this.state.content}/>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
                 {handleEdit}
                 <ul>
                     {bookColumns}

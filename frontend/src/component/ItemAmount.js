@@ -42,7 +42,7 @@ class ItemAmount extends Component {
         console.log("amount:"+this.state.amount);
         return (
             <div className="itemAmount">
-                <Alert content={this.state.content}/>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
                 <Button className="amount" id={"minus"} onClick={this.handleAmountChange.bind(this,-1)} >-</Button>
                 <input type="text" id={"inputtext"} readOnly={true} value={this.state.amount}/>
                 <Button className="amount" id={"plus"} onClick={this.handleAmountChange.bind(this,1)}>+</Button>

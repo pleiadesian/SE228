@@ -35,8 +35,8 @@ class Login extends Component {
                     console.log("after login request:");
                     console.log(res.data);
                     // Get "false" from back end when login fails
-                    if(!(res.data == null)) {
-                        if (res.data.disabled == false) {
+                    if(!(res.data.id == null)) {
+                        if (res.data.disabled == 0) {
                             cookie.save("userInfo", res.data);
                             console.log("save userType:");
                             console.log(res.data.usertype);
@@ -127,7 +127,7 @@ class Login extends Component {
             this.state.content2="";
             return (
                 <div>
-                    <Alert content={this.state.content1}/>
+                    <Alert content={this.state.content1}  cancelAlert={this.handleAlert}/>
                     <Header
                         login={true}
                         username={this.state.username}
@@ -151,7 +151,7 @@ class Login extends Component {
             this.state.content1="";
             return (
                 <div>
-                    <Alert content={this.state.content2}/>
+                    <Alert content={this.state.content2}  cancelAlert={this.handleAlert}/>
                     <Header/>
                     <div id="mainLoginpage" className="main">
                         <div>
