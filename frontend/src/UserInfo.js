@@ -84,7 +84,7 @@ class UserInfo extends Component {
         if (userInfo!=null){
             username = userInfo.username;
         }
-        var avatarUrl = "http://localhost:8080/book/img/user/"+this.state.avatar;
+        var avatarUrl = "http://47.102.207.87:8080/book/img/user/"+this.state.avatar;
         return(
             <div>
                 <Alert content={this.state.content} cancelAlert={this.handleAlert}/>

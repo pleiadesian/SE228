@@ -346,9 +346,9 @@ class BookTable extends Component {
             }
             var imgUrl;
             if(book.img == null){
-                imgUrl = "http://localhost:8080/book/img/book/img_default.jpg";
+                imgUrl = "http://47.102.207.87:8080/book/img/book/img_default.jpg";
             }else{
-                imgUrl = "http://localhost:8080/book/"+book.img;
+                imgUrl = "http://47.102.207.87:8080/book/"+book.img;
             }
             bookColumns.push(
                 <li className="bookColumn">

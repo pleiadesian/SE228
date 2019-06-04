@@ -79,7 +79,7 @@ class BookInfo extends Component {
 		console.log(this.state.content);
 		var imgUrl;
 		if (this.state.bookInfo.img !== ""){
-			imgUrl = "http://localhost:8080/book/"+this.state.bookInfo.img;
+			imgUrl = "http://47.102.207.87:8080/book/"+this.state.bookInfo.img;
 		}
 
 		var admin = cookie.load("admin");

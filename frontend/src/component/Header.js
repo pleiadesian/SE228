@@ -130,9 +130,9 @@ class Header extends Component {
         var userInfo = cookie.load("userInfo");
         var avatarUrl;
         if (userInfo == null) {
-            avatarUrl = "http://localhost:8080/book/img/user/avatar.jpg"
+            avatarUrl = "http://47.102.207.87:8080/book/img/user/avatar.jpg"
         }else{
-            avatarUrl = "http://localhost:8080/book/img/user/"+userInfo.id+".jpg";
+            avatarUrl = "http://47.102.207.87:8080/book/img/user/"+userInfo.id+".jpg";
         }
 
         var img;
