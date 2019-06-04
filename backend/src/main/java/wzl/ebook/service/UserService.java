@@ -22,4 +22,6 @@ public interface UserService {
     UserInfo getUserInfo(int id);
 
     void saveUserAvatar(MultipartFile file, int userId);
+
+    String geneAuthcode(String mail);
 }

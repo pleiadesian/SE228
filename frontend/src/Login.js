@@ -15,6 +15,8 @@ class Login extends Component {
             password : "",
             repeatPassword : "",
             mail : "",
+            auth : "",
+            resAuth : "",
             isValid : false,
             content1: "",
             content2: ""
@@ -22,6 +24,7 @@ class Login extends Component {
         this.handleAlert = this.handleAlert.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.goLogin = this.goLogin.bind(this);
+        this.goAuthcode = this.goAuthcode.bind(this);
         this.goRegister = this.goRegister.bind(this);
     }
 
@@ -59,6 +62,17 @@ class Login extends Component {
             )
     }
     async goRegister() {
+        if (this.state.auth == "") {
+            this.handleAlert("请输入邮箱验证码",2);
+            return;
+        }
+        console.log(this.state.auth);
+        console.log(this.state.resAuth);
+        if (this.state.auth != this.state.resAuth) {
+            this.handleAlert("验证码错误，请检查你的邮箱", 2);
+            return;
+        }
+
         if (this.state.password !== this.state.repeatPassword) {
             this.handleAlert("两次输入密码不一致", 2);
             return;
@@ -73,6 +87,7 @@ class Login extends Component {
         params.append('username',this.state.username);
         params.append('password',this.state.password);
         params.append('mail',this.state.mail);
+        params.append('auth',this.state.auth);
         await axios.post('/book/register',params)
             .then(res => {
                     console.log("after register request:");
@@ -91,6 +106,12 @@ class Login extends Component {
             )
     }
 
+    async goAuthcode() {
+        await axios.get('/book/authcode', {params:{mail : this.state.mail}}).then(res => {
+            this.state.resAuth = res.data;
+        })
+    }
+
     handleChange(e) {
         if(e.target.id === "username") {
             this.state.username = e.target.value;
@@ -100,6 +121,8 @@ class Login extends Component {
             this.state.repeatPassword = e.target.value;
         }else if(e.target.id === "mail") {
             this.state.mail = e.target.value;
+        }else if(e.target.id === "auth") {
+            this.state.auth = e.target.value;
         }
     }
 
@@ -158,16 +181,21 @@ class Login extends Component {
                         </div>
                         <div id="loginColumn">
                             <p className="title">用户名</p>
-                            <input id="username" className="inputID" type="text" name="username"
+                            <input id="username" className="inputID" type="text"
                                    onChange={this.handleChange}/>
                             <p className="title">密码</p>
-                            <input id="passcode" className="inputID" type="password" name="username"
+                            <input id="passcode" className="inputID" type="password"
                                    onChange={this.handleChange}/>
                             <p className="title">重复密码</p>
-                            <input id="repeatPasscode" className="inputID" type="password" name="username"
+                            <input id="repeatPasscode" className="inputID" type="password"
                                    onChange={this.handleChange}/>
                             <p className="title">邮箱</p>
-                            <input id="mail" className="inputID" type="text" name="username"
+                            <input id="mail" className="inputID" type="text"
+                                   onChange={this.handleChange}/>
+                           <input id="signupButton" type="submit" value="发送验证码" className="button"
+                                  onClick={this.goAuthcode}/><br/>
+                            <p className="title">验证码</p>
+                            <input id="auth" className="inputID" type="text"
                                    onChange={this.handleChange}/><br/>
                             <input id="signupButton" type="submit" value="注册" className="button"
                                    onClick={this.goRegister}/><br/>
