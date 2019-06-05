@@ -61,14 +61,6 @@
             <version>3.10.2</version>
         </dependency>
 
-
-        <!-- SpringBootText注解依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Junit依赖 -->
         <dependency>
             <groupId>junit</groupId>
