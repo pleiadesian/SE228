@@ -20,6 +20,7 @@ class UserInfo extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleAlert = this.handleAlert.bind(this);
         this.updateUserInfo = this.updateUserInfo.bind(this);
         this.getUserInfo = this.getUserInfo.bind(this);
         this.getUserInfo();
@@ -84,7 +85,7 @@ class UserInfo extends Component {
         if (userInfo!=null){
             username = userInfo.username;
         }
-        var avatarUrl = "http://47.102.207.87:8080/book/img/user/"+this.state.avatar;
+        var avatarUrl = "http://47.102.207.87:8080/book/"+this.state.avatar;
         return(
             <div>
                 <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
@@ -97,7 +98,7 @@ class UserInfo extends Component {
                 </div>
                 <div id={"userInfoWrapper"}>
                     <div id = {"userInfoAvatar"}>
-                        <img src={avatarUrl} className={"avatarBigImg"} />
+                        <img src={avatarUrl} alt="暂无头像" className={"avatarBigImg"} />
                         <div  className={"avatarUpload"}>
                             <Avatar/>
                         </div>

@@ -106,7 +106,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void saveBookCover(MultipartFile file, int bookId) {
         if (!file.isEmpty()) {
-            String resName = "src/main/resources/static/img/book/";
+            String resName = "/root/wzl/sjtu/22/web/SE228/backend/src/main/resources/static/img/book/";
             String fileName = bookId + ".jpg";
 
             File saveFile= new File(resName + fileName);
