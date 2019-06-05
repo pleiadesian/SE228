@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
         userInfo.setAddress(address);
         userInfo.setGender(gender);
         userInfo.setTelephone(telephone);
-        userInfo.setImg("avatar.jpg");
+        userInfo.setImg("img/user/avatar.jpg");
 
         userInfoRepository.save(userInfo);
     }
