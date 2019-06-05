@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUserAvatar(MultipartFile file, int userId) {
         if (!file.isEmpty()) {
-            String resName = "src/main/resources/static/img/user/";
+            String resName = "/root/wzl/sjtu/22/web/SE228/backend/src/main/resources/static/img/user/";
             String fileName = userId + ".jpg";
             File saveFile= new File(resName + fileName);
             if (!saveFile.getParentFile().exists()) {
