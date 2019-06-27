@@ -2,8 +2,14 @@ package wzl.ebook.serviceimpl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.mongodb.client.gridfs.GridFSBucket;
+import com.mongodb.client.gridfs.model.GridFSFile;
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.gridfs.GridFsResource;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import wzl.ebook.dao.UserInfoRepository;
@@ -12,9 +18,12 @@ import wzl.ebook.entity.User;
 import wzl.ebook.entity.UserInfo;
 import wzl.ebook.service.UserService;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.List;
 
 @Service
@@ -25,6 +34,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserInfoRepository userInfoRepository;
+
+    @Autowired
+    GridFsTemplate gridFsTemplate;
+
+    @Autowired
+    GridFSBucket gridFSBucket;
 
     @Override
     public User handleLogin(String username, String password) {
@@ -127,6 +142,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUserAvatar(MultipartFile file, int userId) {
+        String filename = "UID_" + String.valueOf(userId);
+        try {
+            InputStream inputStream = file.getInputStream();
+            gridFsTemplate.store(inputStream, filename);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        /*
         if (!file.isEmpty()) {
             String resName = "src/main/resources/static/img/user/";
             String fileName = userId + ".jpg";
@@ -147,6 +171,25 @@ public class UserServiceImpl implements UserService {
             UserInfo userInfo = userInfoRepository.findById(userId);
             userInfo.setImg("img/user/"+fileName);
             userInfoRepository.save(userInfo);
+        }*/
+    }
+
+    @Override
+    public BufferedImage getUserAvatar(int userId) {
+        String filename = "UID_" + userId;
+        Query query = Query.query(Criteria.where("filename").is(filename));
+        GridFSFile file = gridFsTemplate.findOne(query);
+        if (file == null) {
+            return null;
+        }
+        GridFsResource cover = new GridFsResource(file, gridFSBucket.openDownloadStream(file.getObjectId()));
+
+        try {
+            InputStream inputStream = cover.getInputStream();
+            return ImageIO.read(inputStream);
+        }catch(Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

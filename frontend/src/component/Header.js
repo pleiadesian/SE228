@@ -132,7 +132,7 @@ class Header extends Component {
         if (userInfo == null) {
             avatarUrl = "http://localhost:8080/book/img/user/avatar.jpg"
         }else{
-            avatarUrl = "http://localhost:8080/book/img/user/"+userInfo.id+".jpg";
+            avatarUrl = "http://localhost:8080/book/getUserAvatar?userId="+userInfo.id;
         }
 
         var img;
