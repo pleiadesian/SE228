@@ -35,12 +35,6 @@ public class UserController {
     @Autowired
     private MongoOperations mongoOperations;
 
-    @Autowired
-    GridFsTemplate gridFsTemplate;
-
-    @Autowired
-    GridFSBucket gridFSBucket;
-
     // 用户登录
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public User login(@RequestParam("username") String username, @RequestParam("password") String password) {
@@ -92,24 +86,13 @@ public class UserController {
     @RequestMapping(value = "/saveUserAvatar", method = RequestMethod.POST)
     public void saveAvatar(HttpServletRequest request, @RequestParam("avatar") MultipartFile file) {
         int userId = Integer.valueOf(request.getParameter("userId"));
-        String filename = "UID_" + String.valueOf(userId);
-        try {
-            InputStream inputStream = file.getInputStream();
-            gridFsTemplate.store(inputStream, filename);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
+        userService.saveUserAvatar(file, userId);
     }
 
-    @RequestMapping(value = "/UserAvatar", method = RequestMethod.GET)
+    @RequestMapping(value = "/getUserAvatar", method = RequestMethod.GET)
     public void getAvatar(HttpServletResponse response, @RequestParam("userId") int userId) {
-        String filename = "UID_" + String.valueOf(userId);
-        Query query = Query.query(Criteria.where("filename").is(filename));
-        GridFSFile file = gridFsTemplate.findOne(query);
-        GridFsResource cover = new GridFsResource(file, gridFSBucket.openDownloadStream(file.getObjectId()));
         try {
-            InputStream inputStream = cover.getInputStream();
-            BufferedImage image = ImageIO.read(inputStream);
+            BufferedImage image = userService.getUserAvatar(userId);
             ImageIO.write(image, "JPG", response.getOutputStream());
         }catch(Exception e) {
             e.printStackTrace();
