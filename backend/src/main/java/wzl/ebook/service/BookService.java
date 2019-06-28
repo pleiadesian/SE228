@@ -3,6 +3,7 @@ package wzl.ebook.service;
 import org.springframework.web.multipart.MultipartFile;
 import wzl.ebook.entity.Book;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public interface BookService {
@@ -18,4 +19,6 @@ public interface BookService {
     List<Book> addOneBook(String bookStr);
 
     void saveBookCover(MultipartFile file, int bookId);
+
+    BufferedImage getBookCover(int bookId);
 }

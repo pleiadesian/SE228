@@ -26,6 +26,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.List;
 
+import static wzl.ebook.serviceimpl.BookServiceImpl.getBufferedImage;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -145,51 +147,19 @@ public class UserServiceImpl implements UserService {
         String filename = "UID_" + String.valueOf(userId);
         try {
             InputStream inputStream = file.getInputStream();
+
+            Query query = Query.query(Criteria.where("filename").is(filename));
+            gridFsTemplate.delete(query);
+
             gridFsTemplate.store(inputStream, filename);
         }catch(Exception e) {
             e.printStackTrace();
         }
-
-        /*
-        if (!file.isEmpty()) {
-            String resName = "src/main/resources/static/img/user/";
-            String fileName = userId + ".jpg";
-            File saveFile= new File(resName + fileName);
-            if (!saveFile.getParentFile().exists()) {
-                saveFile.getParentFile().mkdirs();
-            }
-
-            try {
-                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(saveFile));
-                out.write(file.getBytes());
-                out.flush();
-                out.close();
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            UserInfo userInfo = userInfoRepository.findById(userId);
-            userInfo.setImg("img/user/"+fileName);
-            userInfoRepository.save(userInfo);
-        }*/
     }
 
     @Override
     public BufferedImage getUserAvatar(int userId) {
         String filename = "UID_" + userId;
-        Query query = Query.query(Criteria.where("filename").is(filename));
-        GridFSFile file = gridFsTemplate.findOne(query);
-        if (file == null) {
-            return null;
-        }
-        GridFsResource cover = new GridFsResource(file, gridFSBucket.openDownloadStream(file.getObjectId()));
-
-        try {
-            InputStream inputStream = cover.getInputStream();
-            return ImageIO.read(inputStream);
-        }catch(Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return getBufferedImage(filename, gridFsTemplate, gridFSBucket);
     }
 }

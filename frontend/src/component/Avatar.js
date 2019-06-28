@@ -69,7 +69,7 @@ class Avatar extends Component {
                 listType="picture-card"
                 className="avatar-uploader"
                 showUploadList={false}
-                action="/book/saveUserAvatar"
+                action={this.props.url}
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
             >
