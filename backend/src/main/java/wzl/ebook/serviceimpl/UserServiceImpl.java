@@ -145,33 +145,14 @@ public class UserServiceImpl implements UserService {
         String filename = "UID_" + String.valueOf(userId);
         try {
             InputStream inputStream = file.getInputStream();
+
+            Query query = Query.query(Criteria.where("filename").is(filename));
+            gridFsTemplate.delete(query);
+
             gridFsTemplate.store(inputStream, filename);
         }catch(Exception e) {
             e.printStackTrace();
         }
-
-        /*
-        if (!file.isEmpty()) {
-            String resName = "src/main/resources/static/img/user/";
-            String fileName = userId + ".jpg";
-            File saveFile= new File(resName + fileName);
-            if (!saveFile.getParentFile().exists()) {
-                saveFile.getParentFile().mkdirs();
-            }
-
-            try {
-                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(saveFile));
-                out.write(file.getBytes());
-                out.flush();
-                out.close();
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            UserInfo userInfo = userInfoRepository.findById(userId);
-            userInfo.setImg("img/user/"+fileName);
-            userInfoRepository.save(userInfo);
-        }*/
     }
 
     @Override

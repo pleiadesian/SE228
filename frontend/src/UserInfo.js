@@ -99,7 +99,7 @@ class UserInfo extends Component {
                     <div id = {"userInfoAvatar"}>
                         <img src={avatarUrl} className={"avatarBigImg"} />
                         <div  className={"avatarUpload"}>
-                            <Avatar/>
+                            <Avatar url={"/book/saveUserAvatar"}/>
                         </div>
                     </div>
                     <div id = {"userInfoForm"}>

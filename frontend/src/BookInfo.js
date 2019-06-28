@@ -90,7 +90,7 @@ class BookInfo extends Component {
 		}
 
 		var adminEnabled = admin ? (
-			<Avatar bookId={this.state.bookInfo.id}/>
+			<Avatar bookId={this.state.bookInfo.id} url={"/book/saveBookCover"}/>
 		):"";
         return (
         	<div >
