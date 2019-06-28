@@ -59,7 +59,7 @@ public class BookController {
     }
 
     @RequestMapping(value = "/getBookCover", method = RequestMethod.GET)
-    public void getCover(HttpServletResponse response, @RequestParam("userId") int bookId) {
+    public void getCover(HttpServletResponse response, @RequestParam("bookId") int bookId) {
         try {
             BufferedImage image = bookService.getBookCover(bookId);
             ImageIO.write(image, "JPG", response.getOutputStream());

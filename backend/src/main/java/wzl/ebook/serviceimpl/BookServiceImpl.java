@@ -135,7 +135,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BufferedImage getBookCover(int bookId) {
-        String filename = "ID_" + bookId;
+        String filename = "BID_" + bookId;
         return getBufferedImage(filename, gridFsTemplate, gridFSBucket);
     }
 
