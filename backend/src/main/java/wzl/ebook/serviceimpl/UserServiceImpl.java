@@ -26,6 +26,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.List;
 
+import static wzl.ebook.serviceimpl.BookServiceImpl.getBufferedImage;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -158,19 +160,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public BufferedImage getUserAvatar(int userId) {
         String filename = "UID_" + userId;
-        Query query = Query.query(Criteria.where("filename").is(filename));
-        GridFSFile file = gridFsTemplate.findOne(query);
-        if (file == null) {
-            return null;
-        }
-        GridFsResource cover = new GridFsResource(file, gridFSBucket.openDownloadStream(file.getObjectId()));
-
-        try {
-            InputStream inputStream = cover.getInputStream();
-            return ImageIO.read(inputStream);
-        }catch(Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return getBufferedImage(filename, gridFsTemplate, gridFSBucket);
     }
 }
