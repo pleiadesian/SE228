@@ -93,7 +93,8 @@ class Login extends Component {
                     console.log("after register request:");
                     console.log(res.data);
                     if(res.data === true) {
-                        this.handleAlert("注册成功", 2);
+                        //this.handleAlert("注册成功", 2);
+                        alert("注册成功");
                         this.setState({isValid : true});
                     }
                     else if(res.data === false)
@@ -107,6 +108,7 @@ class Login extends Component {
     }
 
     async goAuthcode() {
+        this.handleAlert("发送验证码成功", 2);
         await axios.get('/book/authcode', {params:{mail : this.state.mail}}).then(res => {
             this.state.resAuth = res.data;
         })
