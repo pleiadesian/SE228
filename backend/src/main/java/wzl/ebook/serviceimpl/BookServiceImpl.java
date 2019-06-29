@@ -2,12 +2,26 @@ package wzl.ebook.serviceimpl;
 
 
 import com.alibaba.fastjson.JSON;
+import com.mongodb.client.gridfs.GridFSBucket;
+import com.mongodb.client.gridfs.model.GridFSFile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.gridfs.GridFsResource;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import wzl.ebook.dao.BookMapper;
 import wzl.ebook.entity.Book;
+import wzl.ebook.entity.UserInfo;
 import wzl.ebook.service.BookService;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,6 +30,12 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookMapper bookMapper;
+
+    @Autowired
+    GridFsTemplate gridFsTemplate;
+
+    @Autowired
+    GridFSBucket gridFSBucket;
 
     @Override
     public List<Book> findAllBook() {
@@ -93,6 +113,44 @@ public class BookServiceImpl implements BookService {
             bookMapper.insert(newBook);
             return bookMapper.selectAll();
         } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public void saveBookCover(MultipartFile file, int bookId) {
+        String filename = "BID_" + bookId;
+        try {
+            InputStream inputStream = file.getInputStream();
+
+            Query query = Query.query(Criteria.where("filename").is(filename));
+            gridFsTemplate.delete(query);
+
+            gridFsTemplate.store(inputStream, filename);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public BufferedImage getBookCover(int bookId) {
+        String filename = "BID_" + bookId;
+        return getBufferedImage(filename, gridFsTemplate, gridFSBucket);
+    }
+
+    static BufferedImage getBufferedImage(String filename, GridFsTemplate gridFsTemplate, GridFSBucket gridFSBucket) {
+        Query query = Query.query(Criteria.where("filename").is(filename));
+        GridFSFile file = gridFsTemplate.findOne(query);
+        if (file == null) {
+            return null;
+        }
+        GridFsResource cover = new GridFsResource(file, gridFSBucket.openDownloadStream(file.getObjectId()));
+
+        try {
+            InputStream inputStream = cover.getInputStream();
+            return ImageIO.read(inputStream);
+        }catch(Exception e) {
             e.printStackTrace();
             return null;
         }

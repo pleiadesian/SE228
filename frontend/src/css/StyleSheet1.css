@@ -19,7 +19,7 @@ body {
 	height:100%;
 	width:100%;
 }
-ƒ
+
 h1 {
 	color: #3E3E3E;
 	font-size: 42px;
@@ -197,7 +197,7 @@ ul {
 }
 
 #mainLoginpage{
-	height:600px;
+	height:650px;
 }
 
 #mainAdmin{
@@ -207,9 +207,64 @@ ul {
 #footer {
 	margin: 50px auto;
 	width: 500px;
-	height: 50px;
+	height: 150px;
 }
 
 	#footer ul li a{
 		font-size: 20px;
 	}
+
+	#userInfoTitle{
+		width:100%;
+		margin: 50px auto;
+	}
+
+	#backButtonWrapper{
+		float:right;
+		width:100px;
+	}
+
+	#userInfoAvatar{
+		float:left;
+		width:700px;
+		height:300px;
+	}
+
+	#userInfoForm{
+		float:right;
+		width:700px;
+		height:300px;
+	}
+
+	#inputWrapper{
+		margin: 10px auto;
+	}
+
+	.avatarBigImg{
+		height:200px;
+		width:200px;
+		position:relative;
+		top:50px;
+	}
+
+.avatarUploadImg{
+	height:112px;
+	width:112px;
+}
+
+	.avatarUpload{
+		float:right;
+		position:relative;
+		top:100px;
+		right:100px;
+	}
+
+.leftBlock{
+	float:left;
+	width : 20%;
+	margin-left:300px;
+}
+
+.rightBlock{
+	float:left;
+}

@@ -74,11 +74,13 @@ class Header extends Component {
     handleSearch() {
         if (this.props.onSearchChange) {
             this.props.onSearchChange();
+        }else{
+            this.handleAlert("请在有图书列表的页面中使用该功能");
         }
     }
 
     handleAlert(content) {
-        this.setState({content : "请先登录"})
+        this.setState({content : content})
     }
 
     handleNavi() {
@@ -90,7 +92,7 @@ class Header extends Component {
         );
         const unloginList = (
             <div>
-                <li><Link onClick={this.handleAlert}>购物车</Link></li>
+                <li><Link onClick={this.handleAlert.bind(this, "请先登录")}>购物车</Link></li>
                 <li><Link to={"/login"} id={"login"}>登录</Link><Link to={"/register"} id={"register"}>注册</Link></li>
             </div>
         );
@@ -125,9 +127,30 @@ class Header extends Component {
                 return (<Redirect to={"/login"}/>);
         }
 
+        var login = cookie.load("login");
+
+        var userInfo = cookie.load("userInfo");
+        var avatarUrl;
+        if (userInfo == null) {
+            avatarUrl = "http://localhost:8080/book/img/user/avatar.jpg"
+        }else{
+            avatarUrl = "http://localhost:8080/book/getUserAvatar?userId="+userInfo.id;
+        }
+
+        var img;
+        if (login == null || login !=="true") {
+            img = (<img src={avatarUrl} className={"avatarImg"} />)
+        }else{
+            img = (
+                <Link to={"/userInfo"}>
+                    <img src={avatarUrl} className={"avatarImg"} />
+                </Link>
+            )
+        }
+
         return (
             <div id="header">
-                <Alert content={this.state.content}/>
+                <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
                 <div id="caption">
                     <h1>e-book</h1>
                 </div>
@@ -136,7 +159,7 @@ class Header extends Component {
                 </div>
                 <div id={"userInfo"}>
                     <div className={"avatar"}>
-                        <img src={require("./img/avatar.jpg")} className={"avatarImg"} />
+                        {img}
                     </div>
                     <div className={"username"}>
                         <h3>{this.state.username}</h3>

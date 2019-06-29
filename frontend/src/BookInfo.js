@@ -6,12 +6,13 @@ import "./css/StyleSheet1.css"
 import axios from "axios";
 import cookie from 'react-cookies';
 import Alert from "./component/Alert";
+import Avatar from "./component/Avatar";
 
 class BookInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			bookInfo : {ID:0,name:"" ,img:"./img/book0.jpg",price: 0,isbn:"0",storage:0,author:"",area:"",press:"",time:""},
+			bookInfo : {ID:0,name:"" ,img:"",price: 0,isbn:"0",storage:0,author:"",area:"",press:"",time:""},
 			quantity : 1,
 			content: ""
 		};
@@ -76,17 +77,30 @@ class BookInfo extends Component {
     render() {
 		console.log("alert content after render:");
 		console.log(this.state.content);
+		var imgUrl= "http://localhost:8080/book/getBookCover?bookId="+this.state.bookInfo.id;
+
+		var admin = cookie.load("admin");
+		if(admin == null || admin !== "true") {
+			admin = false
+		}else{
+			admin = true
+		}
+
+		var adminEnabled = admin ? (
+			<Avatar bookId={this.state.bookInfo.id} url={"/book/saveBookCover"}/>
+		):"";
         return (
         	<div >
-				<Alert content={this.state.content}/>
+				<Alert content={this.state.content} cancelAlert={this.handleAlert}/>
 				<Header/>
 				<div  id={"mainBookinfo"} className={"main"}>
 					<div className={"bookImg"}>
 						<img
 							className="bookInfoCover"
-							src={require( "" + this.state.bookInfo.img)}
+							src={imgUrl}
 							alt={this.state.bookInfo.name}
 						/>
+						{adminEnabled}
 					</div>
 					<div id="infoColumn">
 						<ul id="infolist">

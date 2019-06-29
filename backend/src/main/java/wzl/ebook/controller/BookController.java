@@ -5,9 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import wzl.ebook.entity.Book;
 import wzl.ebook.service.BookService;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 @RestController
@@ -45,5 +50,21 @@ public class BookController {
     public List<Book> addBook(@RequestParam("bookInfo") String bookStr) {
         System.out.println("updateing book list...");
         return bookService.addOneBook(bookStr);
+    }
+
+    @RequestMapping(value = "/saveBookCover", method = RequestMethod.POST)
+    public void saveCover(HttpServletRequest request, @RequestParam("avatar") MultipartFile file) {
+        int bookId = Integer.valueOf(request.getParameter("bookId"));
+        bookService.saveBookCover(file, bookId);
+    }
+
+    @RequestMapping(value = "/getBookCover", method = RequestMethod.GET)
+    public void getCover(HttpServletResponse response, @RequestParam("bookId") int bookId) {
+        try {
+            BufferedImage image = bookService.getBookCover(bookId);
+            ImageIO.write(image, "JPG", response.getOutputStream());
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
