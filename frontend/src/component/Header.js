@@ -74,6 +74,8 @@ class Header extends Component {
     handleSearch() {
         if (this.props.onSearchChange) {
             this.props.onSearchChange();
+        }else{
+            this.handleAlert("请在有图书列表的页面中使用该功能");
         }
     }
 
