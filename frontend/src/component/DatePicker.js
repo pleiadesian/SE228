@@ -17,6 +17,7 @@ class DatePicker extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit= this.handleSubmit.bind(this);
+        this.handleAlert = this.handleAlert(this);
     }
 
     handleChange(e) {
