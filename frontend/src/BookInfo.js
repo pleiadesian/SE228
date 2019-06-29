@@ -77,10 +77,7 @@ class BookInfo extends Component {
     render() {
 		console.log("alert content after render:");
 		console.log(this.state.content);
-		var imgUrl;
-		if (this.state.bookInfo.img !== ""){
-			imgUrl = "http://localhost:8080/book/"+this.state.bookInfo.img;
-		}
+		var imgUrl= "http://localhost:8080/book/getBookCover?bookId="+this.state.bookInfo.id;
 
 		var admin = cookie.load("admin");
 		if(admin == null || admin !== "true") {

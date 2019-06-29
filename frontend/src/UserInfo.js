@@ -81,10 +81,15 @@ class UserInfo extends Component {
     render() {
         var userInfo = cookie.load("userInfo");
         var username;
+        var userId;
+        var avatarUrl;
         if (userInfo!=null){
             username = userInfo.username;
+            userId = userInfo.id;
+            avatarUrl = "http://localhost:8080/book/getUserAvatar?userId=" + userId;
+        }else {
+            avatarUrl = "http://localhost:8080/book/" + this.state.avatar;
         }
-        var avatarUrl = "http://localhost:8080/book/"+this.state.avatar;
         return(
             <div>
                 <Alert content={this.state.content} cancelAlert={this.handleAlert}/>
